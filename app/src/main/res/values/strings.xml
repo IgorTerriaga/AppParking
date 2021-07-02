@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AppParking</string>
     <string name="butaonew">Sou Novo</string>
+    <string name="description_logo">TeriParking logo</string>
+    <string name="possuo_conta">Já tenho conta</string>
+    <string name="bem_vindo">Bem Vindo</string>
 </resources>

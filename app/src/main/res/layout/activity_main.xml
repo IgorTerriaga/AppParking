@@ -27,7 +27,7 @@
         app:srcCompat="@drawable/logo" />
 
     <Button
-        android:id="@+id/buttonNew"
+        android:id="@+id/buttonNext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonNew"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNext"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline

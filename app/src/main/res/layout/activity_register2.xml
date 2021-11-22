@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".Register2Activity">
 
     <TextView
         android:id="@+id/textView2"
@@ -16,7 +16,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:fontFamily="@font/nunito_bold"
-        android:text=" Etapa 1  - Cadastro Pessoal"
+        android:text=" Etapa 2  - Cadastro Veículo"
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -39,7 +39,6 @@
         android:fontFamily="@font/nunito_semibold"
         android:gravity="center_horizontal|center_vertical"
         android:shadowColor="@color/purple_700"
-        android:text="Próximo"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -48,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
         app:strokeColor="@color/purple_500"
-        tools:text="Próximo" />
+        tools:text="Finalizar Cadastro" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
@@ -65,10 +64,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditNome"
+            android:id="@+id/TextInputEditPlaca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome" />
+            android:hint="Placa" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,10 +85,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditEmail"
+            android:id="@+id/TextInputEditModelo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="E-mail"
+            android:hint="Modelo"
             android:inputType="textWebEditText|textWebEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,10 +107,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditSenha"
+            android:id="@+id/TextInputEditCor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Senha"
+            android:hint="Cor"
             android:inputType="textPassword|textWebPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 

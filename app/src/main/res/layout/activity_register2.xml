@@ -39,6 +39,7 @@
         android:fontFamily="@font/nunito_semibold"
         android:gravity="center_horizontal|center_vertical"
         android:shadowColor="@color/purple_700"
+        android:text="Finalizar Cadastro"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"

@@ -1,12 +1,21 @@
 package com.example.appparking.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Login {
-    public Login(String email, String password) {
+    @SerializedName("email")
+    @Expose(serialize = true)
+    public String email;
+    @SerializedName("senha")
+    @Expose(serialize = true)
+    public String senha;
+
+    public Login(String email, String senha) {
         this.email = email;
-        this.password = password;
+        this.senha = senha;
     }
 
-    public String email, password;
 
     public String getEmail() {
         return email;
@@ -16,11 +25,11 @@ public class Login {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

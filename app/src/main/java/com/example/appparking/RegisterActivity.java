@@ -15,7 +15,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        next = findViewById(R.id.buttonNext);
+        next = findViewById(R.id.buttonEnd);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

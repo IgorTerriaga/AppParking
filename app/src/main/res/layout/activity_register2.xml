@@ -28,7 +28,7 @@
 
 
     <Button
-        android:id="@+id/buttonNext"
+        android:id="@+id/buttonEnd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -77,10 +77,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditPlaca"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:hint="Placa"
-            android:maxLength="31"
             android:inputType="none|text"
+            android:maxLength="31"
 
             android:textColor="@color/black"
             android:textCursorDrawable="@color/black" />
@@ -111,7 +111,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:hint="Modelo"
             android:inputType="textWebEditText|textWebEmailAddress"
             android:textColor="@color/black"
@@ -143,7 +143,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditCor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:hint="Cor"
             android:inputType="textPassword|textWebPassword"
             android:textColor="@color/black"

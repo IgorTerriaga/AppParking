@@ -8,8 +8,8 @@
     tools:context=".LoginActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayoutEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -18,28 +18,26 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="543dp"
-        android:textColorHint="@color/black"
-        app:boxBackgroundColor="#FFFFFF"
-
         android:hint="E-mail"
-        app:startIconDrawable="@drawable/ic_baseline_alternate_email_24"
-        app:helperText="obrigatório*"
-        app:helperTextTextColor="@color/red"
+        android:textColorHint="@color/black"
+
+        app:boxBackgroundColor="#FFFFFF"
         app:counterEnabled="true"
         app:counterMaxLength="30"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:startIconDrawable="@drawable/ic_baseline_alternate_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="31"
             android:inputType="textWebEditText|textWebEmailAddress"
+            android:maxLength="31"
             android:textColor="@color/black"
             android:textCursorDrawable="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -60,8 +58,6 @@
         app:errorEnabled="true"
         app:errorIconDrawable="@drawable/ic_baseline_error_24"
         app:startIconDrawable="@drawable/ic_baseline_lock_24"
-        app:helperText="obrigatório*"
-        app:helperTextTextColor="@color/red"
         app:counterEnabled="true"
 
         app:endIconMode="password_toggle"
@@ -72,7 +68,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditSenha"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="textPassword|textWebPassword"
             android:textColor="@color/black"
             android:textColorHint="@color/white" />
@@ -84,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/rounded_corner"
@@ -128,5 +125,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
         app:layout_constraintVertical_bias="0.913" />
+
+    <CheckBox
+        android:id="@+id/checkBoxLembrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Lembrar-me"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogin"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

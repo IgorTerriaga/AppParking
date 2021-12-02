@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:fontFamily="@font/nunito_bold"
@@ -47,51 +47,69 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCor"
         app:strokeColor="@color/purple_500"
         tools:text="Finalizar Cadastro" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="0dp"
+        android:id="@+id/textInputLayoutPlaca"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+
         android:textColorHint="@color/black"
         app:boxBackgroundColor="#FFFFFF"
+        app:endIconMode="clear_text"
+        app:helperText="obrigatório*"
+        app:counterEnabled="true"
+        app:counterMaxLength="8"
+        app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:startIconDrawable="@drawable/ic_baseline_local_parking_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditPlaca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Placa"
+            android:maxLength="31"
+            android:inputType="none|text"
+
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textCursorDrawable="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/textInputLayoutEmail"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:textColorHint="@color/black"
         app:boxBackgroundColor="#FFFFFF"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_baseline_directions_car_24"
+        app:helperTextTextColor="@color/red"
+        app:helperText="obrigatório*"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPlaca">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditModelo"
+            android:id="@+id/TextInputEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Modelo"
@@ -101,19 +119,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
+        android:id="@+id/textInputLayoutCor"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:textColorHint="@color/black"
         app:boxBackgroundColor="#FFFFFF"
+        app:startIconDrawable="@drawable/ic_baseline_color_lens_24"
+        app:endIconMode="clear_text"
+        app:helperTextTextColor="@color/red"
+        app:helperText="obrigatório*"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditCor"

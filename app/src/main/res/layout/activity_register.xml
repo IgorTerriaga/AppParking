@@ -115,7 +115,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="E-mail"
             android:inputType="textWebEditText|textWebEmailAddress"
             android:maxLength="31"

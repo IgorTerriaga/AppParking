@@ -77,7 +77,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditPlaca"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="match_parent"
             android:hint="Placa"
             android:inputType="none|text"
             android:maxLength="31"
@@ -111,7 +111,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditEmail"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="match_parent"
             android:hint="Modelo"
             android:inputType="textWebEditText|textWebEmailAddress"
             android:textColor="@color/black"
@@ -143,7 +143,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditCor"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="match_parent"
             android:hint="Cor"
             android:inputType="textPassword|textWebPassword"
             android:textColor="@color/black"

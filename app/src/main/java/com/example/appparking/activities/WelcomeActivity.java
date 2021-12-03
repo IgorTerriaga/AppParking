@@ -1,6 +1,7 @@
-package com.example.appparking;
+package com.example.appparking.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.appparking.R;
 
 public class WelcomeActivity extends AppCompatActivity {
     private Button logout;

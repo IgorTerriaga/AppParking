@@ -1,4 +1,4 @@
-package com.example.appparking;
+package com.example.appparking.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,19 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Register2Activity extends AppCompatActivity {
+import com.example.appparking.R;
 
-    private Button button;
+public class RegisterActivity extends AppCompatActivity {
+
+    private Button next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register2);
-        button = findViewById(R.id.buttonEnd);
-        button.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_register);
+        next = findViewById(R.id.buttonEnd);
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent intent = new Intent(getApplicationContext(), Register2Activity.class);
                 startActivity(intent);
             }
         });

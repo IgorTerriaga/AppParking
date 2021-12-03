@@ -5,4 +5,6 @@
     <string name="possuo_conta">Já tenho conta</string>
     <string name="bem_vindo">Bem Vindo</string>
     <string name="logo">logo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

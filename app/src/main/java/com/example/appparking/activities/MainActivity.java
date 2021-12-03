@@ -1,4 +1,4 @@
-package com.example.appparking;
+package com.example.appparking.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Timer;
+import com.example.appparking.R;
 
 public class MainActivity extends AppCompatActivity {
     private Boolean WifiConnected = false;

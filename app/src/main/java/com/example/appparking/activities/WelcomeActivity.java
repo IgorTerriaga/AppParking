@@ -6,12 +6,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.appparking.Fragments.LojasFragment;
 import com.example.appparking.Fragments.MaisOcupadasFragment;
+import com.example.appparking.Fragments.MapsFragment;
 import com.example.appparking.Fragments.MeuCarroFragment;
 import com.example.appparking.R;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -41,6 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         .add("Lojas", LojasFragment.class)
                         .add("Vaga mais Ocupadas", MaisOcupadasFragment.class)
                         .add("Meu Veiculo", MeuCarroFragment.class)
+                        .add("Localização", MapsFragment.class)
                         .create()
         );
         viewPager.setAdapter(adapter);

@@ -1,4 +1,4 @@
-package com.example.appparking.Utils;
+package com.example.appparking.utils;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -11,9 +11,6 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by jamiltondamasceno
- */
 
 public class Permissoes {
 

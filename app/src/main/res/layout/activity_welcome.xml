@@ -21,15 +21,17 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/ChangePhoto"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="64dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="88dp"
             android:clickable="true"
+            android:src="@drawable/camera"
+            app:fabSize="auto"
             app:layout_constraintEnd_toEndOf="@+id/profile_image"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="@+id/profile_image"
-            app:srcCompat="@drawable/pencil"
+            app:src="@drawable/pencil"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
@@ -44,8 +46,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
 
             android:src="@drawable/ic_baseline_people_24"
             app:civ_border_color="#FFFFFF"

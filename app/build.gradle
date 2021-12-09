@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.appparking"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -44,7 +44,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
-
+    //implementation 'com.github.dhaval2404:imagepicker:2.1'
     //Optional: see how to use the utility.
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.Drjacky:ImagePicker:1.8.4'
 }

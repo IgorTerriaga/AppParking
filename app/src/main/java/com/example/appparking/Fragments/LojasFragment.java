@@ -1,16 +1,16 @@
 package com.example.appparking.Fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.appparking.API.Conexao;
 import com.example.appparking.API.DataService;
@@ -59,26 +59,32 @@ public class LojasFragment extends Fragment {
                     for (int i = 0; i < listaEstacionamentos.size(); i++) {
                         Estacionamento estacionamento = listaEstacionamentos.get(i);
 
-                        Log.d("Estacionamentos", "onResponse: " + estacionamento.getSede());
+                        //Log.d("Estacionamentos", "onResponse: " + estacionamento.getSede());
 
                         Call<List<Loja>> loja = service.recuperarLojas(estacionamento.getId());
 
                         loja.enqueue(new Callback<List<Loja>>() {
+                            @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
                             public void onResponse(Call<List<Loja>> call, Response<List<Loja>> response) {
 
                                 listaLojas = response.body();
+                                itens = new String[listaLojas.size()];
+                                
+                                for (int i = 0; i < listaLojas.size() ;i++) {
 
-                                for (int i = 0; i < listaLojas.size(); i++) {
-                                    Loja loja1 = listaLojas.get(i);
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                                            getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, Collections.singletonList(listaLojas.get(i).getNome()));
-                                    l.setAdapter(adapter);
-
-
-                                    Log.d("Lojas", "onResponse: " + loja1.getNome());
+                                      itens[i] = listaLojas.get(i).getNome();
+                                    //System.out.println(itens[i]);
 
                                 }
+                                for (int i = 0; i < itens.length; i++) {
+                                    System.out.println(itens.toString());
+                                }
+
+
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                                        getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, itens);
+                                l.setAdapter(adapter);
 
                             }
 

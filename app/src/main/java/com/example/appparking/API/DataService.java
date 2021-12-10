@@ -1,15 +1,28 @@
 package com.example.appparking.API;
 
+import com.example.appparking.Model.Estacionamento;
 import com.example.appparking.Model.Login;
+import com.example.appparking.Model.Loja;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
-public interface DataService  {
+public interface DataService {
+
+    @GET("/estacionamento/{id}/loja")
+    Call<List<Loja>> recuperarLojas(@Path("id") String id);
+
+
+    @GET("/estacionamento")
+    Call<List<Estacionamento>> recuperarEstacionamentos();
 
     @POST("/login")
     @Headers({
@@ -18,6 +31,8 @@ public interface DataService  {
             "Cache-Control: max-age=640000"
     })
     Call<Login> RealizarLogin(@Body Login login);
+
+
 //
 //    @POST("/motorista")
 //    Call<Motorista>Register(@Body Motorista motorista);

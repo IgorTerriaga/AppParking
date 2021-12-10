@@ -5,11 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.LojasFragment" >
 
-    <TextView
-        android:id="@+id/textLojas"
+    <ListView
+        android:id="@+id/listLojas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Lojas Disponíveis"
-        android:textSize="20sp" />
+        android:layout_height="match_parent" />
 </FrameLayout>

@@ -31,7 +31,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="@+id/profile_image"
-            app:src="@drawable/pencil"
+
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button

@@ -157,7 +157,7 @@ public class MapsFragment extends SupportMapFragment
                 // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Permissão de localização necessária")
-                        .setMessage("This app needs the Location permission, please accept to use location functionality")
+                        .setMessage("O aplicativo precisa de sua permissão! por favor, aceite.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

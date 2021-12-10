@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.appparking.API.Conexao;
 import com.example.appparking.API.DataService;
 import com.example.appparking.Model.Login;
 import com.example.appparking.R;
@@ -41,10 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.buttonLogin);
         String urlBASE = "http://192.168.31.154:5000/";
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(urlBASE)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        retrofit = new Conexao().connectAPI(urlBASE);
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

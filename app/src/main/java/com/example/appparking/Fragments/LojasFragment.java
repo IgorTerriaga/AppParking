@@ -5,11 +5,15 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.appparking.API.Conexao;
@@ -17,6 +21,7 @@ import com.example.appparking.API.DataService;
 import com.example.appparking.Model.Estacionamento;
 import com.example.appparking.Model.Loja;
 import com.example.appparking.R;
+import com.example.appparking.adapter.Adapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,8 +34,9 @@ import retrofit2.Retrofit;
 
 public class LojasFragment extends Fragment {
 
-    private ListView l;
+    //private ListView l;
     private String[] itens;
+    private RecyclerView recyclerView;
     private Retrofit retrofit;
     private List<Estacionamento> listaEstacionamentos = new ArrayList<>();
     private List<Loja> listaLojas = new ArrayList<>();
@@ -45,7 +51,9 @@ public class LojasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lojas, container, false);
-        l = (ListView) view.findViewById(R.id.listLojas);
+        //l = view.findViewById(R.id.listLojas);
+        recyclerView = view.findViewById(R.id.recyclerView);
+
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);
@@ -59,8 +67,6 @@ public class LojasFragment extends Fragment {
                     for (int i = 0; i < listaEstacionamentos.size(); i++) {
                         Estacionamento estacionamento = listaEstacionamentos.get(i);
 
-                        //Log.d("Estacionamentos", "onResponse: " + estacionamento.getSede());
-
                         Call<List<Loja>> loja = service.recuperarLojas(estacionamento.getId());
 
                         loja.enqueue(new Callback<List<Loja>>() {
@@ -69,23 +75,29 @@ public class LojasFragment extends Fragment {
                             public void onResponse(Call<List<Loja>> call, Response<List<Loja>> response) {
 
                                 listaLojas = response.body();
-                                itens = new String[listaLojas.size()];
-                                
-                                for (int i = 0; i < listaLojas.size() ;i++) {
 
-                                      itens[i] = listaLojas.get(i).getNome();
-                                    //System.out.println(itens[i]);
+//                                itens = new String[listaLojas.size()];
+//
+//                                for (int i = 0; i < listaLojas.size(); i++) {
+//
+//                                    itens[i] = listaLojas.get(i).getNome();
+//
+//
+//                                }
+//                                for (int i = 0; i < itens.length; i++) {
+//                                    System.out.println(itens.toString());
+//                                }
 
-                                }
-                                for (int i = 0; i < itens.length; i++) {
-                                    System.out.println(itens.toString());
-                                }
-
-
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                                        getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, itens);
-                                l.setAdapter(adapter);
-
+//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+//                                        getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, itens);
+//                                l.setAdapter(adapter);
+                                Adapter adapter = new Adapter(listaLojas);
+                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                                recyclerView.setLayoutManager(layoutManager);
+                                //recyclerView.setAdapter();
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
+                                recyclerView.setAdapter(adapter);
                             }
 
                             @Override

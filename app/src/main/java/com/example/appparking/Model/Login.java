@@ -10,12 +10,16 @@ public class Login {
     @SerializedName("senha")
     @Expose(serialize = true)
     public String senha;
+    public String token;
 
     public Login(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }
 
+    public String getToken() {
+        return token;
+    }
 
     public String getEmail() {
         return email;

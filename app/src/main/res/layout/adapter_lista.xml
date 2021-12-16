@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/textLojas"
-            android:layout_width="wrap_content"
+            android:layout_width="112dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/nunito_bold"
-            android:text="Lojas"
-            android:textSize="16sp"
-            android:typeface="normal" />
+            android:text="TextView"
+            android:textColor="@color/purple_500"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/imageTipoLoja"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="200dp"
+            app:srcCompat="@drawable/ic_baseline_error_24" />
+
     </LinearLayout>
 </LinearLayout>

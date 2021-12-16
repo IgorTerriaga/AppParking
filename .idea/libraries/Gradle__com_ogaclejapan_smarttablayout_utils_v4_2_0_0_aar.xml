@@ -5,8 +5,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f861926bdaee0e1cbcd3e7b2c1f96221/transformed/jetified-utils-v4-2.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f861926bdaee0e1cbcd3e7b2c1f96221/transformed/jetified-utils-v4-2.0.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f861926bdaee0e1cbcd3e7b2c1f96221/transformed/utils-v4-2.0.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f861926bdaee0e1cbcd3e7b2c1f96221/transformed/utils-v4-2.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f861926bdaee0e1cbcd3e7b2c1f96221/transformed/utils-v4-2.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5505b58cc5afaf9fb9149a6318d57319/transformed/utils-v4-2.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5505b58cc5afaf9fb9149a6318d57319/transformed/utils-v4-2.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5505b58cc5afaf9fb9149a6318d57319/transformed/utils-v4-2.0.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ogaclejapan.smarttablayout/utils-v4/2.0.0/e61db0e154eab1eb2a01be91881ec0f718c2f790/utils-v4-2.0.0-javadoc.jar!/" />

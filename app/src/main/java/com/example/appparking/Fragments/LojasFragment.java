@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,10 @@ import com.example.appparking.adapter.Adapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,14 +38,14 @@ import retrofit2.Retrofit;
 
 public class LojasFragment extends Fragment {
 
-    //private ListView l;
-    private String[] itens;
     private RecyclerView recyclerView;
     private Retrofit retrofit;
     private List<Estacionamento> listaEstacionamentos = new ArrayList<>();
+    private List<Loja> listaResult = new ArrayList<>();
     private List<Loja> listaLojas = new ArrayList<>();
 
     String urlBASE = "http://192.168.31.154:5000/";
+
 
     public LojasFragment() {
 
@@ -51,7 +55,6 @@ public class LojasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lojas, container, false);
-        //l = view.findViewById(R.id.listLojas);
         recyclerView = view.findViewById(R.id.recyclerView);
 
 
@@ -65,39 +68,34 @@ public class LojasFragment extends Fragment {
                 if (response.isSuccessful()) {
                     listaEstacionamentos = response.body();
                     for (int i = 0; i < listaEstacionamentos.size(); i++) {
+
                         Estacionamento estacionamento = listaEstacionamentos.get(i);
 
                         Call<List<Loja>> loja = service.recuperarLojas(estacionamento.getId());
+
 
                         loja.enqueue(new Callback<List<Loja>>() {
                             @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
                             public void onResponse(Call<List<Loja>> call, Response<List<Loja>> response) {
-
                                 listaLojas = response.body();
+//                                listaResult.clear();
+                                for (int i = 0; i < listaLojas.size(); i++) {
 
-//                                itens = new String[listaLojas.size()];
-//
-//                                for (int i = 0; i < listaLojas.size(); i++) {
-//
-//                                    itens[i] = listaLojas.get(i).getNome();
-//
-//
-//                                }
-//                                for (int i = 0; i < itens.length; i++) {
-//                                    System.out.println(itens.toString());
-//                                }
+                                    listaResult.add(listaLojas.get(i));
+                                    listaResult = listaResult.stream().distinct().collect(Collectors.toList());
+                                    Log.d("testeeeeeeee", "onResponse: " + listaResult.get(i).getNome());
+                                }
 
-//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                                        getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, itens);
-//                                l.setAdapter(adapter);
-                                Adapter adapter = new Adapter(listaLojas);
+                                Adapter adapter = new Adapter(listaResult);
+
                                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                                 recyclerView.setLayoutManager(layoutManager);
-                                //recyclerView.setAdapter();
+
                                 recyclerView.setHasFixedSize(true);
-                                recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
+                                //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
                                 recyclerView.setAdapter(adapter);
+
                             }
 
                             @Override

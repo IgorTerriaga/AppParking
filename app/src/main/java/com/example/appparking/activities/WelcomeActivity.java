@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,12 +31,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
     MapFragment mapFragment;
     CircleImageView profile;
-
+    private ImageView search;
     private Button logout;
     private SmartTabLayout smartTabLayout;
     private ViewPager viewPager;
-    private TextView text;
-    ImageView imageView;
     FloatingActionButton change;
 
     @Override
@@ -62,6 +59,14 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+        ImageView image = (ImageView) findViewById(R.id.imageSearchVaga);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), VacanceActivity.class);
+                startActivity(intent);
+            }
+        });
 
         logout = findViewById(R.id.buttonLogout);
         mapFragment = new MapFragment();

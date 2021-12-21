@@ -73,7 +73,6 @@ public class LojasFragment extends Fragment {
 
                         Call<List<Loja>> loja = service.recuperarLojas(estacionamento.getId());
 
-
                         loja.enqueue(new Callback<List<Loja>>() {
                             @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
@@ -84,7 +83,7 @@ public class LojasFragment extends Fragment {
 
                                     listaResult.add(listaLojas.get(i));
                                     listaResult = listaResult.stream().distinct().collect(Collectors.toList());
-                                    Log.d("testeeeeeeee", "onResponse: " + listaResult.get(i).getNome());
+                                    //Log.d("testeeeeeeee", "onResponse: " + listaResult.get(i).getNome());
                                 }
 
                                 Adapter adapter = new Adapter(listaResult);

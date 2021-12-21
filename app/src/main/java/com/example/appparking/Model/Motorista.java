@@ -4,8 +4,10 @@ public class Motorista {
     public String nome;
     public String email;
     public String senha;
-    public  Boolean deficiente;
+    public Boolean deficiente;
     public Boolean idoso;
+    public String token;
+    public String error;
 
     public Motorista(String nome, String email, String senha, Boolean deficiente, Boolean idoso) {
         this.nome = nome;
@@ -13,6 +15,11 @@ public class Motorista {
         this.senha = senha;
         this.deficiente = deficiente;
         this.idoso = idoso;
+    }
+
+
+    public String getError() {
+        return error;
     }
 
     public String getNome() {
@@ -37,6 +44,11 @@ public class Motorista {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+
+    public String getToken() {
+        return token;
     }
 
     public Boolean getDeficiente() {

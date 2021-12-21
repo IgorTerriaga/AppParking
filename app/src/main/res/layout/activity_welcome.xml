@@ -59,6 +59,28 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="VectorDrawableCompat" />
 
+        <ImageView
+            android:id="@+id/imageSearchVaga"
+            android:layout_width="111dp"
+            android:layout_height="69dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/profile_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/park" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="111dp"
+            android:layout_height="69dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.619"
+            app:srcCompat="@drawable/newcar" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.ogaclejapan.smarttablayout.SmartTabLayout

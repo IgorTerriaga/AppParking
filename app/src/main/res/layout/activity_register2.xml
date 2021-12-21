@@ -75,7 +75,7 @@
         app:startIconDrawable="@drawable/ic_baseline_local_parking_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditPlaca"
+            android:id="@+id/TextInputEditNome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Placa"

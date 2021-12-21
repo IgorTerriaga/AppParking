@@ -23,9 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private Boolean DataPhoneConnected = false;
     private Button buttonNew;
     private TextView hasAcc;
-    Handler mHandler = new Handler();
-    boolean isRunning = true;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +36,9 @@ public class MainActivity extends AppCompatActivity {
         buttonNew = findViewById(R.id.buttonEnd);
         hasAcc = findViewById(R.id.textHasAccount);
 
-        buttonNew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
-                startActivity(intent);
-            }
+        buttonNew.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(intent);
         });
 
         hasAcc.setOnClickListener(new View.OnClickListener() {

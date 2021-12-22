@@ -75,15 +75,18 @@
         app:startIconDrawable="@drawable/ic_baseline_local_parking_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditNome"
+            android:id="@+id/TextInputEditPlaca"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Placa"
-            android:inputType="none|text"
+
+            android:inputType="textCapCharacters"
             android:maxLength="31"
 
+            android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textCursorDrawable="@color/black" />
+            android:textCursorDrawable="@color/black"
+            tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -109,13 +112,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPlaca">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditEmail"
+            android:id="@+id/TextInputEditModelo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Modelo"
             android:inputType="textWebEditText|textWebEmailAddress"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -147,7 +151,8 @@
             android:hint="Cor"
             android:inputType="textPassword|textWebPassword"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.appparking.Model;
 
 public class Motorista {
+    public String idDriver;
     public String nome;
     public String email;
     public String senha;
@@ -40,6 +41,10 @@ public class Motorista {
 
     public String getSenha() {
         return senha;
+    }
+
+    public String getId() {
+        return idDriver;
     }
 
     public void setSenha(String senha) {

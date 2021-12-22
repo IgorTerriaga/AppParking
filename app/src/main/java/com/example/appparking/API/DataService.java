@@ -4,6 +4,7 @@ import com.example.appparking.Model.Estacionamento;
 import com.example.appparking.Model.Login;
 import com.example.appparking.Model.Loja;
 import com.example.appparking.Model.Motorista;
+import com.example.appparking.Model.Veiculo;
 
 import java.util.List;
 
@@ -41,4 +42,12 @@ public interface DataService {
     })
     Call<Motorista> RegisterFirst(@Body Motorista motorista);
 
+
+    @POST("/veiculo")
+    @Headers({
+            "Content-Type: application/json;charset=utf-8",
+            "Accept: application/json;charset=utf-8",
+            "Cache-Control: max-age=640000"
+    })
+    Call<Veiculo> RegisterFirst(@Body Veiculo veiculo);
 }

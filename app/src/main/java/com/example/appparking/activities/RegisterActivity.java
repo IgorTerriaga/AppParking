@@ -1,7 +1,5 @@
 package com.example.appparking.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,19 +8,21 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.appparking.API.Conexao;
 import com.example.appparking.API.DataService;
 import com.example.appparking.Model.Motorista;
 import com.example.appparking.R;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -40,8 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        nome = findViewById(R.id.TextInputEditNome);
-        email = findViewById(R.id.TextInputEditEmail);
+        nome = findViewById(R.id.TextInputEditPlaca);
+        email = findViewById(R.id.TextInputEditModelo);
         senha = findViewById(R.id.TextInputEditSenha);
         checkBoxIdoso = findViewById(R.id.checkBoxIdoso);
         checkBoxEspecial = findViewById(R.id.checkBoxEspecial);
@@ -56,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 if (checkBoxIdoso.isChecked()) {
                     idoso = true;
                 }
@@ -65,9 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 Motorista motorista = new Motorista(nome.getText().toString(), email.getText().toString(), senha.getText().toString().trim(), idoso, especial);
-                Log.d("xxxxxxxxxxxxxxxxxxxxxx", "onClick: " + nome.toString().trim());
-                Log.d("xxxxxxxxxxxxxxxxxxxxxx", "onClick: " + email.toString().trim());
-                Log.d("xxxxxxxxxxxxxxxxxxxxxx", "onClick: " + senha.toString().trim());
+
                 DataService service = retrofit.create(DataService.class);
 
                 Call<Motorista> call = service.RegisterFirst(motorista);
@@ -76,32 +73,34 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Motorista> call, Response<Motorista> response) {
                         if (response.isSuccessful()) {
-
-
                             Intent intent = new Intent(getApplicationContext(), Register2Activity.class);
+                            //System.out.println("xxxxxxxxxxxxx " + response.body().getId());
+                            intent.putExtra("idDriver", response.body().getId());
                             startActivity(intent);
+
                         } else {
-                            String res = null;
+                            JSONObject jObjError = null;
                             try {
-                                res = response.errorBody().string();
+                                jObjError = new JSONObject(response.errorBody().string());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            Toast.makeText(getApplicationContext(), res, Toast.LENGTH_SHORT).show();
+                            try {
+                                Toast.makeText(getApplicationContext(), jObjError.getString("error"), Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-
                     }
-
 
                     @Override
                     public void onFailure(Call<Motorista> call, Throwable t) {
 
                     }
                 });
-
-
             }
         });
     }
-
 }

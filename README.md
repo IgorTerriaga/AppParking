@@ -3,7 +3,7 @@
 PT-BR
 
 O aplicativo TeriParking, tem por objetivo recomendar vagas de estacionamento para motoristas.
-O Aplicativo comunica-se com uma API e com o microntrolador ESP3266 e sensores, cuja o objetivo é verificar a ocupação das vagas.
+O Aplicativo comunica-se com uma API e com o microcontrolador ESP3266 e sensores, cuja o objetivo é verificar a ocupação das vagas.
 
 EN-US
 

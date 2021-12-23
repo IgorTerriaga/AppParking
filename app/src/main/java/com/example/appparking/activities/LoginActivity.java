@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         email = findViewById(R.id.TextInputEditModelo);
         senha = findViewById(R.id.TextInputEditSenha);
 

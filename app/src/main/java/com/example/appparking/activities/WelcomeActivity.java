@@ -31,7 +31,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     MapFragment mapFragment;
     CircleImageView profile;
-    private ImageView search;
     private Button logout;
     private SmartTabLayout smartTabLayout;
     private ViewPager viewPager;
@@ -47,8 +46,6 @@ public class WelcomeActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         //getSupportActionBar().setElevation(0);
         profile = findViewById(R.id.profile_image);
-        //imageView = findViewById(R.id.CoverImage);
-        //floatingActionButton = findViewById(R.id.floatingActionButton);
         change = findViewById(R.id.ChangePhoto);
         change.setOnClickListener(new View.OnClickListener() {
             @Override

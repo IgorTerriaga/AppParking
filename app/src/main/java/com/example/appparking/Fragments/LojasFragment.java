@@ -5,30 +5,22 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.example.appparking.API.Conexao;
 import com.example.appparking.API.DataService;
 import com.example.appparking.Model.Estacionamento;
 import com.example.appparking.Model.Loja;
 import com.example.appparking.R;
-import com.example.appparking.adapter.Adapter;
+import com.example.appparking.Adapters.Adapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;

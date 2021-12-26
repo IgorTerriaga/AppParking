@@ -3,25 +3,24 @@ package com.example.appparking.Fragments;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appparking.API.Conexao;
 import com.example.appparking.API.DataService;
-import com.example.appparking.Model.Loja;
 import com.example.appparking.Model.Veiculo;
 import com.example.appparking.R;
-import com.example.appparking.adapter.VeiculoAdapter;
+import com.example.appparking.Adapters.VeiculoAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,10 +28,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,6 +65,7 @@ public class MeuCarroFragment extends Fragment {
         DataService service = retrofit.create(DataService.class);
         Call<List<Veiculo>> veiculo = service.ConsultarVeiculos("Bearer " + token);
         veiculo.enqueue(new Callback<List<Veiculo>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<List<Veiculo>> call, Response<List<Veiculo>> response) {
                 if (response.isSuccessful()) {
@@ -75,12 +73,14 @@ public class MeuCarroFragment extends Fragment {
                     for (int i = 0; i < listaVeiculos.size(); i++) {
                         Veiculo veiculo1 = listaVeiculos.get(i);
                         listaResult.add(listaVeiculos.get(i));
+                        listaResult = listaResult.stream().distinct().collect(Collectors.toList());
                         //Log.d("O veículo  ", "onResponse: " + veiculo1.getModelo() + veiculo1.getCor());
                     }
 
                     for (int i = 0; i < listaResult.size(); i++) {
                         System.out.println("A lista ->  " + listaResult.get(i).getModelo());
                     }
+
                     VeiculoAdapter adapter = new VeiculoAdapter(listaResult);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                     recyclerView.setLayoutManager(layoutManager);

@@ -3,6 +3,7 @@ package com.example.appparking.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -67,6 +68,13 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
                     intent.putExtra("email", email.getText().toString().trim());
+
+                    // Recupera a instância do preferences
+                    SharedPreferences preferences = getSharedPreferences("my_prefs_data", MODE_PRIVATE);
+                    // Para gravar os dados, pegar a instância do editor
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("token", response.body().getToken());
+                    editor.commit();
                     startActivity(intent);
 
                     System.out.println(response.code());

@@ -45,7 +45,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         smartTabLayout = findViewById(R.id.viewPagerTab);
         viewPager = findViewById(R.id.viewPager);
-        getSupportActionBar().setElevation(0);
+        //getSupportActionBar().setElevation(0);
         profile = findViewById(R.id.profile_image);
         //imageView = findViewById(R.id.CoverImage);
         //floatingActionButton = findViewById(R.id.floatingActionButton);

@@ -5,13 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.MeuCarroFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textCarros"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerVeiculos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Meu Veículo"
-        android:textSize="20sp" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

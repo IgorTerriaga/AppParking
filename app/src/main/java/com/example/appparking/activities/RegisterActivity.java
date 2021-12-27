@@ -14,6 +14,7 @@ import com.example.appparking.API.Conexao;
 import com.example.appparking.API.DataService;
 import com.example.appparking.Model.Motorista;
 import com.example.appparking.R;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -30,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Button next;
     private TextInputEditText nome, email, senha;
-    private CheckBox checkBoxIdoso, checkBoxEspecial;
+    private Chip checkBoxIdoso, checkBoxEspecial;
     private Boolean idoso, especial = false;
 
     private Retrofit retrofit;

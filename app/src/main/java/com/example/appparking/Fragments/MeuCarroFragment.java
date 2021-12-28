@@ -62,7 +62,6 @@ public class MeuCarroFragment extends Fragment {
         String token = preferences.getString("token", "");
         //Log.d("Olha o token que veio", "onCreateView: " + token);
 
-
         DataService service = retrofit.create(DataService.class);
         Call<List<Veiculo>> veiculo = service.ConsultarVeiculos("Bearer " + token);
         veiculo.enqueue(new Callback<List<Veiculo>>() {

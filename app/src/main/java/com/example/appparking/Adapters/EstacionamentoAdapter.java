@@ -47,6 +47,7 @@ public class EstacionamentoAdapter extends RecyclerView.Adapter<EstacionamentoAd
         } else {
             holder.imagem.setImageResource(R.drawable.shopping);
         }
+        holder.idEstacionamento.setText(estacionamento.getId());
 
     }
 
@@ -56,7 +57,7 @@ public class EstacionamentoAdapter extends RecyclerView.Adapter<EstacionamentoAd
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView sede;
+        private TextView sede, idEstacionamento;
         private ImageView imagem;
         private Button botaoLojas;
         private Button botaoProcurarVaga;
@@ -67,10 +68,11 @@ public class EstacionamentoAdapter extends RecyclerView.Adapter<EstacionamentoAd
             imagem = itemView.findViewById(R.id.imageEstacionamento);
             botaoLojas = itemView.findViewById(R.id.buttonFavoritar);
             botaoProcurarVaga = itemView.findViewById(R.id.buttonProcurarVaga);
+            idEstacionamento = itemView.findViewById(R.id.idEstacionamento);
 
             botaoLojas.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), LojaActivity.class);
-
+                intent.putExtra("idEstacionamento", idEstacionamento.getText());
                 v.getContext().startActivity(intent);
             });
 

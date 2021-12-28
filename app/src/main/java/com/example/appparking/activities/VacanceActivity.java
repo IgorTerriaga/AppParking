@@ -33,28 +33,21 @@ public class VacanceActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RecyclerView recycler;
     private List<Estacionamento> listaEstacionamentos = new ArrayList<>();
-    private Button butaoFavoritar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacance);
 
-        butaoFavoritar = findViewById(R.id.buttonFavoritar);
-        String urlBASE = "http://192.168.31.154:5000/";
+
+        String urlBASE = "http://192.168.2.125:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
 
 
         recycler = findViewById(R.id.recyclerViewEstacionamento);
 
-//        butaoFavoritar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                butaoFavoritar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_baseline_favorite_24));
-//                Toast.makeText(getApplicationContext(), "Favoritado", Toast.LENGTH_SHORT).show();
-//            }
-//        });
         DataService service = retrofit.create(DataService.class);
         Call<List<Estacionamento>> estacionamentos = service.recuperarEstacionamentos();
         estacionamentos.enqueue(new Callback<List<Estacionamento>>() {

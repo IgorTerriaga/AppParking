@@ -59,16 +59,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="VectorDrawableCompat" />
 
-        <ImageView
-            android:id="@+id/imageSearchVaga"
-            android:layout_width="111dp"
-            android:layout_height="69dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/profile_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/park" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.ogaclejapan.smarttablayout.SmartTabLayout

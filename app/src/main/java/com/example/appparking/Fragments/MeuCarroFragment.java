@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class MeuCarroFragment extends Fragment {
     private List<Veiculo> listaVeiculos = new ArrayList<>();
     private List<Veiculo> listaResult = new ArrayList<>();
 
-    String urlBASE = "http://192.168.31.154:5000/";
+    String urlBASE = "http://192.168.2.125:5000/";
 
 
     public MeuCarroFragment() {
@@ -74,11 +75,7 @@ public class MeuCarroFragment extends Fragment {
                         Veiculo veiculo1 = listaVeiculos.get(i);
                         listaResult.add(listaVeiculos.get(i));
                         listaResult = listaResult.stream().distinct().collect(Collectors.toList());
-                        //Log.d("O veículo  ", "onResponse: " + veiculo1.getModelo() + veiculo1.getCor());
-                    }
-
-                    for (int i = 0; i < listaResult.size(); i++) {
-                        System.out.println("A lista ->  " + listaResult.get(i).getModelo());
+                        Log.d("O veículo  ", "onResponse: " + veiculo1.getModelo() + veiculo1.getCor());
                     }
 
                     VeiculoAdapter adapter = new VeiculoAdapter(listaResult);
@@ -102,7 +99,6 @@ public class MeuCarroFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
-
             }
 
             @Override
@@ -110,7 +106,6 @@ public class MeuCarroFragment extends Fragment {
 
             }
         });
-
 
         return view;
     }

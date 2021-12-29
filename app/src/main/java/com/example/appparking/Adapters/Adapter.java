@@ -32,7 +32,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Loja loja = listaLoja.get(position);
-        holder.loja.setText(loja.getNome());
+        holder.loja.setText(loja.getNome() + " - Próximo ao Portão " +  loja.getProximo());
         if (loja.getCategoria().contains("Vestuário")) {
             holder.imagemTipoLoja.setImageResource(R.drawable.fashion);
         } else if (loja.getCategoria().contains("Alimentação")) {

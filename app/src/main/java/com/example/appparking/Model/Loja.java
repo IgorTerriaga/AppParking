@@ -7,10 +7,19 @@ public class Loja {
     private String id;
     private String nome;
     private String categoria;
+    private String proximo;
 
     public Loja(String id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    public String getProximo() {
+        return proximo;
+    }
+
+    public void setProximo(String proximo) {
+        this.proximo = proximo;
     }
 
     public String getCategoria() {

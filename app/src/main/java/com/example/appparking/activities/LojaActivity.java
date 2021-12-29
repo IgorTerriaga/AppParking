@@ -61,7 +61,6 @@ public class LojaActivity extends AppCompatActivity {
                 for (int i = 0; i < listaLojas.size(); i++) {
                     listaResult.add(listaLojas.get(i));
                     listaResult = listaResult.stream().distinct().collect(Collectors.toList());
-                    Log.d("testeeeeeeee", "onResponse: " + listaResult.get(i).getNome());
                 }
 
                 Adapter adapter = new Adapter(listaResult);

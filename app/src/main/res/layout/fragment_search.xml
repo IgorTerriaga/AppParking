@@ -7,13 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SearchFragment">
 
+    <Button
+        android:id="@+id/buttonVagas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="284dp"
+        android:text="Ver Vagas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
-        android:id="@+id/imageSearch"
-        android:layout_width="334dp"
-        android:layout_height="345dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="136dp"
-        android:src="@drawable/logo"
+        android:id="@+id/imageView6"
+        android:layout_width="121dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="208dp"
+        android:src="@drawable/parkingicon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

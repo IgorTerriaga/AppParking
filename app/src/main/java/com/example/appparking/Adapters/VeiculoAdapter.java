@@ -35,7 +35,7 @@ public class VeiculoAdapter extends RecyclerView.Adapter<VeiculoAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Veiculo veiculo = listVeiculo.get(position);
-        holder.meuVeiculo.setText(veiculo.getModelo() + "" + veiculo.getCor());
+        holder.meuVeiculo.setText(veiculo.getModelo() + " - " + veiculo.getCor());
         holder.imageVeiculo.setImageResource(R.drawable.newcar);
 
     }

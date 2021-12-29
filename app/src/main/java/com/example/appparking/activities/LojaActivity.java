@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.example.appparking.API.Conexao;
@@ -38,7 +39,7 @@ public class LojaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loja);
-        String urlBASE = "http://192.168.2.125:5000/";
+        String urlBASE = "http://192.168.31.154:5000/";
 
         recyclerView = findViewById(R.id.meuRecycler);
 
@@ -60,7 +61,7 @@ public class LojaActivity extends AppCompatActivity {
                 for (int i = 0; i < listaLojas.size(); i++) {
                     listaResult.add(listaLojas.get(i));
                     listaResult = listaResult.stream().distinct().collect(Collectors.toList());
-                    //Log.d("testeeeeeeee", "onResponse: " + listaResult.get(i).getNome());
+                    Log.d("testeeeeeeee", "onResponse: " + listaResult.get(i).getNome());
                 }
 
                 Adapter adapter = new Adapter(listaResult);

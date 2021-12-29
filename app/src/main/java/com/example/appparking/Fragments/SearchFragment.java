@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.appparking.R;
@@ -18,6 +19,7 @@ import com.example.appparking.activities.VacanceActivity;
 public class SearchFragment extends Fragment {
 
     private ImageView image;
+    private Button verVagas;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -27,8 +29,10 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        image = view.findViewById(R.id.imageSearch);
-        image.setOnClickListener(v -> {
+
+        verVagas = view.findViewById(R.id.buttonVagas);
+        //image = view.findViewById(R.id.imageSearch);
+        verVagas.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), VacanceActivity.class);
             startActivity(intent);
         });

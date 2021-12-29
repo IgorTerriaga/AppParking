@@ -22,13 +22,16 @@ import com.example.appparking.API.DataService;
 import com.example.appparking.Model.Veiculo;
 import com.example.appparking.R;
 import com.example.appparking.Adapters.VeiculoAdapter;
+import com.google.android.gms.common.util.CollectionUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;
@@ -44,7 +47,7 @@ public class MeuCarroFragment extends Fragment {
     private List<Veiculo> listaVeiculos = new ArrayList<>();
     private List<Veiculo> listaResult = new ArrayList<>();
 
-    String urlBASE = "http://192.168.2.125:5000/";
+    String urlBASE = "http://192.168.31.154:5000/";
 
 
     public MeuCarroFragment() {
@@ -70,14 +73,8 @@ public class MeuCarroFragment extends Fragment {
             public void onResponse(Call<List<Veiculo>> call, Response<List<Veiculo>> response) {
                 if (response.isSuccessful()) {
                     listaVeiculos = response.body();
-                    for (int i = 0; i < listaVeiculos.size(); i++) {
-                        Veiculo veiculo1 = listaVeiculos.get(i);
-                        listaResult.add(listaVeiculos.get(i));
-                        listaResult = listaResult.stream().distinct().collect(Collectors.toList());
-                        Log.d("O veículo  ", "onResponse: " + veiculo1.getModelo() + veiculo1.getCor());
-                    }
-
-                    VeiculoAdapter adapter = new VeiculoAdapter(listaResult);
+                    //listaResult = listaResult.stream().distinct().collect(Collectors.toList());
+                    VeiculoAdapter adapter = new VeiculoAdapter(listaVeiculos);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                     recyclerView.setLayoutManager(layoutManager);
 

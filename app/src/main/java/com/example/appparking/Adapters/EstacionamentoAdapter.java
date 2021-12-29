@@ -1,6 +1,8 @@
 package com.example.appparking.Adapters;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appparking.Model.Estacionamento;
 import com.example.appparking.R;
 import com.example.appparking.activities.LojaActivity;
+import com.example.appparking.activities.OptarPorVagaActivity;
 
 import java.util.List;
 
@@ -70,13 +73,27 @@ public class EstacionamentoAdapter extends RecyclerView.Adapter<EstacionamentoAd
             botaoProcurarVaga = itemView.findViewById(R.id.buttonProcurarVaga);
             idEstacionamento = itemView.findViewById(R.id.idEstacionamento);
 
+
+
             botaoLojas.setOnClickListener(v -> {
+                SharedPreferences prefs;
+                prefs = PreferenceManager.
+                        getDefaultSharedPreferences(v.getContext());
+                SharedPreferences.Editor ed = prefs.edit();
+                ed.putString("idEstacionamento", idEstacionamento.getText().toString());
+                ed.apply();
+
                 Intent intent = new Intent(v.getContext(), LojaActivity.class);
+
                 intent.putExtra("idEstacionamento", idEstacionamento.getText());
                 v.getContext().startActivity(intent);
             });
 
-            botaoProcurarVaga.setOnClickListener(v -> Toast.makeText(v.getContext(), "Clicou", Toast.LENGTH_SHORT).show());
+            botaoProcurarVaga.setOnClickListener(v1 -> {
+                Intent intent1 = new Intent(v1.getContext(), OptarPorVagaActivity.class);
+                Toast.makeText(v1.getContext(), "Teste", Toast.LENGTH_SHORT).show();
+                v1.getContext().startActivity(intent1);
+            });
 
         }
     }

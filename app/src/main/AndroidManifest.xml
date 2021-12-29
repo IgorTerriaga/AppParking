@@ -34,7 +34,7 @@
             />
         </activity>
         <activity
-            android:name=".activities.VagaRapidaActivity"
+            android:name=".activities.OptarPorVagaActivity"
             android:exported="false" />
         <activity
             android:name=".activities.EspecialActivity"

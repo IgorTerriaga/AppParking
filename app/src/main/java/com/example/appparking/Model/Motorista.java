@@ -2,10 +2,13 @@ package com.example.appparking.Model;
 
 public class Motorista {
     public String idDriver;
+    public String id;
     public String nome;
     public String email;
     public String senha;
     public Boolean deficiente;
+    public String latitude;
+    public String longitude;
     public Boolean idoso;
     public String token;
     public String error;
@@ -18,58 +21,44 @@ public class Motorista {
         this.idoso = idoso;
     }
 
-
-    public String getError() {
-        return error;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public String getId() {
         return idDriver;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public String getIdDriver() {
+        return idDriver;
     }
+
+    public void setIdDriver(String idDriver) {
+        this.idDriver = idDriver;
+    }
+
 
 
     public String getToken() {
         return token;
     }
 
-    public Boolean getDeficiente() {
-        return deficiente;
-    }
 
-    public void setDeficiente(Boolean deficiente) {
-        this.deficiente = deficiente;
-    }
-
-    public Boolean getIdoso() {
-        return idoso;
-    }
-
-    public void setIdoso(Boolean idoso) {
-        this.idoso = idoso;
-    }
 
 }

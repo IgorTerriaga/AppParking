@@ -1,16 +1,16 @@
 package com.example.appparking.activities;
 
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.widget.LinearLayout;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.LinearLayout;
 
 import com.example.appparking.API.Conexao;
 import com.example.appparking.API.DataService;
@@ -50,6 +50,12 @@ public class LojaActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String idEstacionamento = extras.getString("idEstacionamento");
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);;
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("idEstacionamento", idEstacionamento);
+        editor.apply();
+
 
         Call<List<Loja>> loja = service.recuperarLojas(idEstacionamento);
 

@@ -55,10 +55,10 @@ public class VacanceActivity extends AppCompatActivity {
             public void onResponse(Call<List<Estacionamento>> call, Response<List<Estacionamento>> response) {
                 if (response.isSuccessful()) {
                     listaEstacionamentos = response.body();
-                    for (int a = 0; a < listaEstacionamentos.size(); a++) {
-                        Estacionamento estacionamento = listaEstacionamentos.get(a);
-
-                    }
+//                    for (int a = 0; a < listaEstacionamentos.size(); a++) {
+//                        Estacionamento estacionamento = listaEstacionamentos.get(a);
+//
+//                    }
 
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                     recycler.setLayoutManager(layoutManager);

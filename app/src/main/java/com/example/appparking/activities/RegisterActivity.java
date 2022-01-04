@@ -53,55 +53,52 @@ public class RegisterActivity extends AppCompatActivity {
         retrofit = new Conexao().connectAPI(urlBASE);
 
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        next.setOnClickListener(v -> {
 
-                if (checkBoxIdoso.isChecked()) {
-                    idoso = true;
-                }
-                if (checkBoxEspecial.isChecked()) {
-                    especial = true;
-                }
+            if (checkBoxIdoso.isChecked()) {
+                idoso = true;
+            }
+            if (checkBoxEspecial.isChecked()) {
+                especial = true;
+            }
 
-                Motorista motorista = new Motorista(nome.getText().toString(), email.getText().toString(), senha.getText().toString().trim(), idoso, especial);
+            Motorista motorista = new Motorista(nome.getText().toString(), email.getText().toString(), senha.getText().toString().trim(), idoso, especial);
 
-                DataService service = retrofit.create(DataService.class);
+            DataService service = retrofit.create(DataService.class);
 
-                Call<Motorista> call = service.RegisterFirst(motorista);
+            Call<Motorista> call = service.RegisterFirst(motorista);
 
-                call.enqueue(new Callback<Motorista>() {
-                    @Override
-                    public void onResponse(Call<Motorista> call, Response<Motorista> response) {
-                        if (response.isSuccessful()) {
-                            Intent intent = new Intent(getApplicationContext(), Register2Activity.class);
-                            //System.out.println("xxxxxxxxxxxxx " + response.body().getId());
-                            intent.putExtra("idDriver", response.body().getId());
-                            startActivity(intent);
+            call.enqueue(new Callback<Motorista>() {
+                @Override
+                public void onResponse(Call<Motorista> call, Response<Motorista> response) {
+                    if (response.isSuccessful()) {
+                        Intent intent = new Intent(getApplicationContext(), Register2Activity.class);
+                        //System.out.println("xxxxxxxxxxxxx " + response.body().getId());
+                        intent.putExtra("idDriver", response.body().getId());
+                        startActivity(intent);
 
-                        } else {
-                            JSONObject jObjError = null;
-                            try {
-                                jObjError = new JSONObject(response.errorBody().string());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                Toast.makeText(getApplicationContext(), jObjError.getString("error"), Toast.LENGTH_LONG).show();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                    } else {
+                        JSONObject jObjError = null;
+                        try {
+                            jObjError = new JSONObject(response.errorBody().string());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            Toast.makeText(getApplicationContext(), jObjError.getString("error"), Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<Motorista> call, Throwable t) {
+                @Override
+                public void onFailure(Call<Motorista> call, Throwable t) {
 
-                    }
-                });
-            }
+                }
+            });
         });
     }
 }

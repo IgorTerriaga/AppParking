@@ -40,9 +40,6 @@
             android:name=".activities.OptarPorVagaActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.EspecialActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.VacanceActivity"
             android:exported="false" />
         <!--

@@ -24,6 +24,7 @@ public class OptarPorVagaActivity extends AppCompatActivity {
         buttonVagasPorLoja = findViewById(R.id.buttonVagaLoja);
 
         buttonVaga.setOnClickListener(v -> {
+
             Intent intent = new Intent(v.getContext(), ShowVacanceActivity.class);
             v.getContext().startActivity(intent);
         });

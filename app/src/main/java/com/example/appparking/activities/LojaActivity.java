@@ -1,9 +1,12 @@
 package com.example.appparking.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.RequiresApi;
@@ -18,6 +21,7 @@ import com.example.appparking.Adapters.Adapter;
 import com.example.appparking.Model.Estacionamento;
 import com.example.appparking.Model.Loja;
 import com.example.appparking.R;
+import com.example.appparking.Utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +43,7 @@ public class LojaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loja);
-        String urlBASE = "http://192.168.31.154:5000/";
+        String urlBASE = "http://192.168.2.125:5000/";
 
         recyclerView = findViewById(R.id.meuRecycler);
 
@@ -51,13 +55,15 @@ public class LojaActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String idEstacionamento = extras.getString("idEstacionamento");
 
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);;
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("idEstacionamento", idEstacionamento);
         editor.apply();
 
 
         Call<List<Loja>> loja = service.recuperarLojas(idEstacionamento);
+
 
         loja.enqueue(new Callback<List<Loja>>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -66,6 +72,7 @@ public class LojaActivity extends AppCompatActivity {
                 listaLojas = response.body();
                 for (int i = 0; i < listaLojas.size(); i++) {
                     listaResult.add(listaLojas.get(i));
+
                     listaResult = listaResult.stream().distinct().collect(Collectors.toList());
                 }
 
@@ -76,6 +83,29 @@ public class LojaActivity extends AppCompatActivity {
                 recyclerView.setHasFixedSize(true);
                 recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
                 recyclerView.setAdapter(adapter);
+
+                //evento de Click
+                recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Loja loja1 = listaResult.get(position);
+                        //System.out.println("Olha o id da loja" + loja1.getId());
+
+                        Intent intent = new Intent(view.getContext(), ShowVacanceLojaActivity.class);
+                        intent.putExtra("id", loja1.getId());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                }));
 
             }
 

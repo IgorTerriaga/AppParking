@@ -26,6 +26,9 @@
             android:name=".activities.ShowVacanceActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.ShowVacanceLojaActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.LojaActivity"
             android:exported="false" />
         <activity android:name=".activities.SplashActivity">

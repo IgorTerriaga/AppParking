@@ -37,9 +37,9 @@ public class ShowVacanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_vacance);
 
-        portao = findViewById(R.id.textPortao);
+        //portao = findViewById(R.id.textPortao);
         textVaga = findViewById(R.id.textVaga);
-        String urlBASE = "http://192.168.31.154:5000/";
+        String urlBASE = "http://192.168.2.125:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);

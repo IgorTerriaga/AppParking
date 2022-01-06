@@ -3,12 +3,14 @@ package com.example.appparking.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.appparking.Fragments.MaisOcupadasFragment;
@@ -28,6 +30,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     //MapFragment mapFragment;
     CircleImageView profile;
+    private Toolbar mToolbar;
     private Button logout;
     private SmartTabLayout smartTabLayout;
     private ViewPager viewPager;
@@ -42,6 +45,10 @@ public class WelcomeActivity extends AppCompatActivity {
         smartTabLayout = findViewById(R.id.viewPagerTab);
         viewPager = findViewById(R.id.viewPager);
         //getSupportActionBar().setElevation(0);
+
+        mToolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(mToolbar);
+
         profile = findViewById(R.id.profile_image);
         change = findViewById(R.id.ChangePhoto);
         change.setOnClickListener(new View.OnClickListener() {
@@ -82,5 +89,13 @@ public class WelcomeActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 }

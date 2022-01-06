@@ -22,10 +22,12 @@ public class OptarPorVagaActivity extends AppCompatActivity {
 
         buttonVaga = findViewById(R.id.buttonVaga);
         buttonVagasPorLoja = findViewById(R.id.buttonVagaLoja);
-//
-//        buttonVaga.setOnClickListener(v -> {
-//
-//        });
+
+        buttonVaga.setOnClickListener(v -> {
+
+            Intent intent = new Intent(v.getContext(), ShowVacanceActivity.class);
+            v.getContext().startActivity(intent);
+        });
 
         buttonVagasPorLoja.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), LojaActivity.class);

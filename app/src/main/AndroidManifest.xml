@@ -23,6 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppParking">
         <activity
+            android:name=".activities.ShowVacanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ShowVacanceLojaActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.LojaActivity"
             android:exported="false" />
         <activity android:name=".activities.SplashActivity">
@@ -35,9 +41,6 @@
         </activity>
         <activity
             android:name=".activities.OptarPorVagaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.EspecialActivity"
             android:exported="false" />
         <activity
             android:name=".activities.VacanceActivity"
@@ -78,7 +81,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="preloaded_fonts"

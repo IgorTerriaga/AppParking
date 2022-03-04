@@ -40,8 +40,8 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
 
         //portao = findViewById(R.id.textPortao);
         textVaga = findViewById(R.id.textVaga);
-        botaoVagaAceitar = findViewById(R.id.botaoAceitar);
-        botaoVagaRejeitar = findViewById(R.id.botaoRejeitar);
+        botaoVagaAceitar = findViewById(R.id.buttonAceitar);
+        botaoVagaRejeitar = findViewById(R.id.buttonRejeitar);
 
         String urlBASE = "http://192.168.2.128:5000/";
 

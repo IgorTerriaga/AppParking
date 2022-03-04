@@ -33,6 +33,12 @@ public interface DataService {
     @GET("/estacionamento")
     Call<List<Estacionamento>> recuperarEstacionamentos();
 
+
+    @GET("/vaga/{id}")
+    Call<Vaga> pegarVagas(@Path("id") String id);
+
+
+
     @POST("/login")
     @Headers({
             "Content-Type: application/json;charset=utf-8",

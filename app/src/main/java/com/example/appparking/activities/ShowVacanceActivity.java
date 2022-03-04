@@ -39,7 +39,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
 
         //portao = findViewById(R.id.textPortao);
         textVaga = findViewById(R.id.textVaga);
-        String urlBASE = "http://192.168.2.125:5000/";
+        String urlBASE = "http://192.168.2.128:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);
@@ -52,18 +52,35 @@ public class ShowVacanceActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     String idEstacionamento = prefs.getString("idEstacionamento", null);
-                    //String idEstacionamento = extras.getString("idEstacionamento");
+
                     assert response.body() != null;
                     Vaga vaga = new Vaga(idEstacionamento, response.body().getLongitude(), response.body().getLatitude());
 
                     Call<Vaga> requestVaga = service.RecomendarVaga(response.body().id, vaga);
+
+
+                    SharedPreferences prefs1;
+                    prefs1 = PreferenceManager.
+                            getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor ed = prefs1.edit();
+                    ed.putString("idMotorista", response.body().id);
+                    ed.apply();
+
+
                     requestVaga.enqueue(new Callback<Vaga>() {
                         @Override
                         public void onResponse(Call<Vaga> call, Response<Vaga> response) {
-                            if (response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 textVaga.setText(response.body().getVaga());
 
-                            }else {
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                String idMotorista = prefs.getString("idMotorista", null);
+                                //System.out.println("Cheguei aqui com os seguinte valores sobre a vaga" +  response.body().getLatitude() + "  =----=" + response.body().getLongitude());
+                                MyThread myThread = new MyThread(idMotorista, response.body().getLatitude(), response.body().getLongitude());
+                                new Thread(myThread).start();
+                                //System.out.println("Aqui tbm");
+
+                            } else {
                                 JSONObject jObjError = null;
                                 try {
                                     jObjError = new JSONObject(response.errorBody().string());
@@ -110,5 +127,77 @@ public class ShowVacanceActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    class MyThread implements Runnable {
+
+        private String id;
+        private String Latitude, Longitude;
+        private String LatitudeVaga, LongitudeVaga;
+
+        public String getLatitude() {
+            return Latitude;
+        }
+
+        public void setLatitude(String latitude) {
+            Latitude = latitude;
+        }
+
+        public String getLongitude() {
+            return Longitude;
+        }
+
+        public void setLongitude(String longitude) {
+            Longitude = longitude;
+        }
+
+        public MyThread(String id, String LatitudeVaga, String LongitudeVaga) {
+            this.id = id;
+            this.LatitudeVaga = LatitudeVaga;
+            this.LongitudeVaga = LongitudeVaga;
+            System.out.println("No construtor de MyThread");
+
+        }
+
+        @Override
+        public void run() {
+            //String urlBASE = "http://192.168.2.125:5000/";
+            String urlBASE = "http://192.168.2.128:5000/";
+
+            retrofit = new Conexao().connectAPI(urlBASE);
+            DataService service = retrofit.create(DataService.class);
+            Call<Motorista> motorista = service.AtualizarLongLati(id, LatitudeVaga, LongitudeVaga);
+            //System.out.println("Antes de fazer a requisição");
+            motorista.enqueue(new Callback<Motorista>() {
+                @Override
+                public void onResponse(Call<Motorista> call, Response<Motorista> response) {
+                    if (response.isSuccessful()) {
+
+                        Latitude = response.body().getLatitude(); //motorista
+                        Longitude = response.body().getLongitude(); // motorista
+                        if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)){
+                            System.out.println("Ele ta na vaga");
+                        }
+                        System.out.println(Latitude + " --------------  " + Longitude);
+                    }else{
+                        System.out.println(response.message());
+                        System.out.println(response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Motorista> call, Throwable t) {
+
+                }
+            });
+
+            runOnUiThread(() -> new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("ok");
+                }
+            });
+
+        }
     }
 }

@@ -41,7 +41,8 @@ public class VacanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vacance);
 
 
-        String urlBASE = "http://192.168.2.125:5000/";
+        //String urlBASE = "http://192.168.2.125:5000/";
+        String urlBASE = "http://192.168.2.128:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
 
@@ -55,10 +56,6 @@ public class VacanceActivity extends AppCompatActivity {
             public void onResponse(Call<List<Estacionamento>> call, Response<List<Estacionamento>> response) {
                 if (response.isSuccessful()) {
                     listaEstacionamentos = response.body();
-//                    for (int a = 0; a < listaEstacionamentos.size(); a++) {
-//                        Estacionamento estacionamento = listaEstacionamentos.get(a);
-//
-//                    }
 
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                     recycler.setLayoutManager(layoutManager);

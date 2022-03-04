@@ -17,8 +17,12 @@ import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface DataService {
 
@@ -79,5 +83,18 @@ public interface DataService {
             "Cache-Control: max-age=640000"
     })
     Call<Vaga> RecomendarVaga(@Path("idMotorista") String id, @Body Vaga vaga);
+
+
+    @PUT("/motorista/{id}/{latitude}/{longitude}")
+    @Headers({
+            "Content-Type: application/json;charset=utf-8",
+            "Accept: application/json;charset=utf-8",
+            "Cache-Control: max-age=640000"
+    })
+    Call<Motorista> AtualizarLongLati(@Path("id") String id, @Path("latitude") String Latitude, @Path("longitude") String Longitude);
+
+
+
+
 
 }

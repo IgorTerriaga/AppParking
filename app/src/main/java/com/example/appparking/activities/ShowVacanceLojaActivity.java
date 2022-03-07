@@ -3,6 +3,7 @@ package com.example.appparking.activities;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,9 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
     private TextView portao, textVaga;
     private Retrofit retrofit;
     private Button botaoVagaAceitar, botaoVagaRejeitar;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

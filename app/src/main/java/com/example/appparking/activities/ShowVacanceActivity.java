@@ -176,7 +176,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
             myLocations.add(new Localizacao("-1111111.005", "-1111111.006"));
             myLocations.add(new Localizacao("-1111111.007", "-1111111.008"));
             myLocations.add(new Localizacao("-1111111.009", "-1111111.0010"));
-            myLocations.add(new Localizacao("-10.6999841", "-37.4266416"));
+            myLocations.add(new Localizacao(LatitudeVaga, LongitudeVaga));
             int v = 0;
 
             Localizacao localizacao;
@@ -196,11 +196,11 @@ public class ShowVacanceActivity extends AppCompatActivity {
                     public void onResponse(Call<Vaga> call, Response<Vaga> response) {
                         if (response.isSuccessful()) {
                             if (response.body().getStatus()) {
-                                ref = "Outro";
+                                ref = "Outro Motorista ocupou sua vaga :(";
                                 flag = false;
                             } else {
                                 if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
-                                    ref = "Vaga ocupada!!!";
+                                    ref = "A Vaga recomendada foi ocupada com sucesso!";
                                     flag = false;
                                 }
                             }
@@ -215,7 +215,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
                     }
                 });
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -225,6 +225,6 @@ public class ShowVacanceActivity extends AppCompatActivity {
                 textVaga.setText(ref);
             });
 
-            }
         }
     }
+}

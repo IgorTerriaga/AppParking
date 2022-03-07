@@ -41,12 +41,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        hasAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2 = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent2);
-            }
+        hasAcc.setOnClickListener(view -> {
+            Intent intent2 = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent2);
         });
     }
 

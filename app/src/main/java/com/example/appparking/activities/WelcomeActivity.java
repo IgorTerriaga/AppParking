@@ -59,7 +59,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 getSupportFragmentManager(),
                 FragmentPagerItems.with(this)
                         .add("Procurar Vaga", SearchFragment.class)
-                        .add("Vaga mais Ocupadas", MaisOcupadasFragment.class)
+                        //.add("Vaga mais Ocupadas", MaisOcupadasFragment.class)
                         .add("Meu Veiculo", MeuCarroFragment.class)
                         //.add("Localização", MapsFragment.class)
                         .create()

@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
         login = findViewById(R.id.buttonLogin);
         //String urlBASE = "http://192.168.2.125:5000/";
-        String urlBASE = "http://192.168.2.128:5000/";
+        String urlBASE = "http://192.168.2.75:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
 

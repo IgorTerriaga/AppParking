@@ -1,8 +1,10 @@
 package com.example.appparking.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Button;
@@ -50,7 +52,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
         textVaga = findViewById(R.id.textVaga);
         botaoVagaAceitar = findViewById(R.id.buttonAceitar);
         botaoVagaRejeitar = findViewById(R.id.buttonRejeitar);
-        String urlBASE = "http://192.168.2.128:5000/";
+        String urlBASE = "http://192.168.2.75:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);
@@ -161,65 +163,93 @@ public class ShowVacanceActivity extends AppCompatActivity {
             this.idVaga = idVaga;
         }
 
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void run() {
 
 
-            String urlBASE = "http://192.168.2.128:5000/";
+            String urlBASE = "http://192.168.2.75:5000/";
             retrofit = new Conexao().connectAPI(urlBASE);
             DataService service = retrofit.create(DataService.class);
-
             ArrayList<Localizacao> myLocations = new ArrayList<>();
+            //ArrayList<Localizacao> test = new ArrayList<>();
 
-            myLocations.add(new Localizacao("-1111111.001", "-1111111.002"));
-            myLocations.add(new Localizacao("-1111111.003", "-1111111.004"));
-            myLocations.add(new Localizacao("-1111111.005", "-1111111.006"));
-            myLocations.add(new Localizacao("-1111111.007", "-1111111.008"));
-            myLocations.add(new Localizacao("-1111111.009", "-1111111.0010"));
-            myLocations.add(new Localizacao(LatitudeVaga, LongitudeVaga));
+
+            Call<List<Vaga>> allVagas = service.listAll();
+            allVagas.enqueue(new Callback<List<Vaga>>() {
+                @Override
+                public void onResponse(Call<List<Vaga>> call, Response<List<Vaga>> response) {
+                    //response.body().forEach((n)-> System.out.println(n.getLatitude() + " ----  " + n.getLongitude() ));
+                    response.body().forEach((n) -> myLocations.add(new Localizacao(n.getLatitude(), n.getLongitude())));
+                    //myLocations.forEach((n)-> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
+
+                }
+
+                @Override
+                public void onFailure(Call<List<Vaga>> call, Throwable t) {
+
+                }
+            });
+
+//            myLocations.add(new Localizacao("-1111111.001", "-1111111.002"));
+//            myLocations.add(new Localizacao("-1111111.003", "-1111111.004"));
+//            myLocations.add(new Localizacao("-1111111.005", "-1111111.006"));
+//            myLocations.add(new Localizacao("-1111111.007", "-1111111.008"));
+//            myLocations.add(new Localizacao("-1111111.009", "-1111111.0010"));
+//
+//
+//            myLocations.add(new Localizacao(LatitudeVaga, LongitudeVaga));
+            if (myLocations.isEmpty()){
+                System.out.println("Está vazio");
+            }else{
+                myLocations.forEach((n)-> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
+            }
+            //myLocations.forEach((n)-> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
             int v = 0;
 
+            System.out.println("Depois aqui..");
             Localizacao localizacao;
 
-            while (flag) {
-                v = new Random().nextInt(myLocations.size());
-
-                localizacao = myLocations.get(v);
-                Latitude = localizacao.getLatitude();
-                Longitude = localizacao.getLongitude();
-
-                System.out.println(Latitude + "------------------" + Longitude);
-
-                Call<Vaga> vaga = service.pegarVagas(idVaga);
-                vaga.enqueue(new Callback<Vaga>() {
-                    @Override
-                    public void onResponse(Call<Vaga> call, Response<Vaga> response) {
-                        if (response.isSuccessful()) {
-                            if (response.body().getStatus()) {
-                                ref = "Outro Motorista ocupou sua vaga :(";
-                                flag = false;
-                            } else {
-                                if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
-                                    ref = "A Vaga recomendada foi ocupada com sucesso!";
-                                    flag = false;
-                                }
-                            }
-                        } else {
-                            System.out.println(response.body());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Vaga> call, Throwable t) {
-
-                    }
-                });
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+//            while (flag) {
+//                v = new Random().nextInt(myLocations.size());
+//
+//                localizacao = myLocations.get(v);
+//                Latitude = localizacao.getLatitude();
+//                Longitude = localizacao.getLongitude();
+//
+//                System.out.println(Latitude + "------------------" + Longitude);
+//
+//                Call<Vaga> vaga = service.pegarVagas(idVaga);
+//                vaga.enqueue(new Callback<Vaga>() {
+//                    @Override
+//                    public void onResponse(Call<Vaga> call, Response<Vaga> response) {
+//                        if (response.isSuccessful()) {
+//                            if (response.body().getStatus()) {
+//                                ref = "Outro Motorista ocupou sua vaga :(";
+//                                flag = false;
+//                            } else {
+//                                if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
+//                                    ref = "A Vaga recomendada foi ocupada com sucesso!";
+//                                    flag = false;
+//                                }
+//                            }
+//                        } else {
+//                            System.out.println(response.body());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Vaga> call, Throwable t) {
+//
+//                    }
+//                });
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
             runOnUiThread(() -> {
                 textVaga.setText(ref);

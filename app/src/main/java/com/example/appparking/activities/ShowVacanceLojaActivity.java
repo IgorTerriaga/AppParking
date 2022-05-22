@@ -47,7 +47,7 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
         botaoVagaAceitar = findViewById(R.id.buttonAceitar);
         botaoVagaRejeitar = findViewById(R.id.buttonRejeitar);
 
-        String urlBASE = "http://192.168.2.128:5000/";
+        String urlBASE = "http://192.168.2.75:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);

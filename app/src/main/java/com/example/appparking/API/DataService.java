@@ -37,6 +37,8 @@ public interface DataService {
     @GET("/vaga/{id}")
     Call<Vaga> pegarVagas(@Path("id") String id);
 
+    @GET("/vagas")
+    Call<List<Vaga>> listAll();
 
 
     @POST("/login")
@@ -54,7 +56,6 @@ public interface DataService {
             "Cache-Control: max-age=640000"
     })
     Call<Motorista> RegisterFirst(@Body Motorista motorista);
-
 
 
     @GET("/motorista")
@@ -98,9 +99,6 @@ public interface DataService {
             "Cache-Control: max-age=640000"
     })
     Call<Motorista> AtualizarLongLati(@Path("id") String id, @Path("latitude") String Latitude, @Path("longitude") String Longitude);
-
-
-
 
 
 }

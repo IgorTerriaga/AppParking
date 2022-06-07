@@ -34,8 +34,6 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
     private Button botaoVagaAceitar, botaoVagaRejeitar;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +45,7 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
         botaoVagaAceitar = findViewById(R.id.buttonAceitar);
         botaoVagaRejeitar = findViewById(R.id.buttonRejeitar);
 
-        String urlBASE = "http://192.168.2.75:5000/";
+        String urlBASE = "http://10.0.0.158:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);
@@ -87,7 +85,7 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
                                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                 String idMotorista = prefs.getString("idMotorista", null);
 
-                                MyThread myThread = new MyThread(idMotorista, response.body().getLatitude(), response.body().getLongitude() );
+                                MyThread myThread = new MyThread(idMotorista, response.body().getLatitude(), response.body().getLongitude());
                                 new Thread(myThread).start();
 
 
@@ -101,7 +99,6 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 try {
-                                    //Toast.makeText(getApplicationContext(), jObjError.getString("error"), Toast.LENGTH_LONG).show();
                                     textVaga.setText(jObjError.getString("error"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -170,8 +167,7 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            //String urlBASE = "http://192.168.2.125:5000/";
-            String urlBASE = "http://192.168.2.128:5000/";
+            String urlBASE = "http://10.0.0.158:5000/";
 
             retrofit = new Conexao().connectAPI(urlBASE);
             DataService service = retrofit.create(DataService.class);
@@ -184,11 +180,11 @@ public class ShowVacanceLojaActivity extends AppCompatActivity {
 
                         Latitude = response.body().getLatitude(); //motorista
                         Longitude = response.body().getLongitude(); // motorista
-                        if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)){
+                        if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
                             System.out.println("Ele ta na vaga");
                         }
                         System.out.println(Latitude + " --------------  " + Longitude);
-                    }else{
+                    } else {
                         System.out.println(response.message());
                         System.out.println(response.body());
                     }

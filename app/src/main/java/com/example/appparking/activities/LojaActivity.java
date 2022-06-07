@@ -43,7 +43,7 @@ public class LojaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loja);
-        String urlBASE = "http://192.168.2.75:5000/";
+        String urlBASE = "http://10.0.0.158:5000/";
 
         recyclerView = findViewById(R.id.meuRecycler);
 

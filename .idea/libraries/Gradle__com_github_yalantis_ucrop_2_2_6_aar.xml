@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.yalantis:ucrop:2.2.6@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/08be3dc1ca2ecaa6d7d6a40e9c3468f4/transformed/ucrop-2.2.6/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c66d93b2ece2754208cd4a8846cc948c/transformed/ucrop-2.2.6/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/08be3dc1ca2ecaa6d7d6a40e9c3468f4/transformed/ucrop-2.2.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/08be3dc1ca2ecaa6d7d6a40e9c3468f4/transformed/ucrop-2.2.6/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/08be3dc1ca2ecaa6d7d6a40e9c3468f4/transformed/ucrop-2.2.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c66d93b2ece2754208cd4a8846cc948c/transformed/ucrop-2.2.6/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c66d93b2ece2754208cd4a8846cc948c/transformed/ucrop-2.2.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c66d93b2ece2754208cd4a8846cc948c/transformed/ucrop-2.2.6/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yalantis/ucrop/2.2.6/463960c5eeefff73517b978228d207911146c162/ucrop-2.2.6-javadoc.jar!/" />

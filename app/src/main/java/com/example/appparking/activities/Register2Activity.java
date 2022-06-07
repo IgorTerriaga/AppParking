@@ -43,7 +43,7 @@ public class Register2Activity extends AppCompatActivity {
         modelo = findViewById(R.id.TextInputEditModelo);
         cor = findViewById(R.id.TextInputEditCor);
 
-        String urlBASE = "http://192.168.31.154:5000/";
+        String urlBASE = "http://10.0.0.158:5000/";
         retrofit = new Conexao().connectAPI(urlBASE);
 
         button.setOnClickListener(new View.OnClickListener() {

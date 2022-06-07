@@ -20,12 +20,13 @@
         <entry key="..\:/Users/Dev/AndroidStudioProjects/AppParking/app/src/main/res/layout/fragment_meu_carro.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_downward_24.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/activity_especial.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/activity_loja.xml" value="0.16354166666666667" />
         <entry key="app/src/main/res/layout/activity_optar_vaga.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/activity_register2.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_show_vacance.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_show_vacance_loja.xml" value="0.10462962962962963" />
+        <entry key="app/src/main/res/layout/activity_show_vacance_loja.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_vacance.xml" value="0.1988472622478386" />
         <entry key="app/src/main/res/layout/activity_vaga_rapida.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.25" />

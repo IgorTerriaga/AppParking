@@ -1,8 +1,5 @@
 package com.example.appparking.activities;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +7,9 @@ import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appparking.API.Conexao;
 import com.example.appparking.API.DataService;
@@ -23,11 +23,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.LinkedTransferQueue;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,7 +38,6 @@ public class ShowVacanceActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private Button botaoVagaAceitar, botaoVagaRejeitar;
-    private String idVaga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +48,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
         textVaga = findViewById(R.id.textVaga);
         botaoVagaAceitar = findViewById(R.id.buttonAceitar);
         botaoVagaRejeitar = findViewById(R.id.buttonRejeitar);
-        String urlBASE = "http://192.168.2.75:5000/";
+        String urlBASE = "http://10.0.0.158:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);
@@ -86,26 +82,39 @@ public class ShowVacanceActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Vaga> call, Response<Vaga> response) {
                             if (response.isSuccessful()) {
-                                textVaga.setText(response.body().getVaga());
+                                textVaga.setText(response.body() != null ? response.body().getVaga() : null);
 
-                                idVaga = response.body().getId();
+                                SharedPreferences prefs2;
+                                prefs2 = PreferenceManager.
+                                        getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor ed = prefs2.edit();
+                                ed.putString("idVaga", response.body().getId());
+                                ed.apply();
 
+                                SharedPreferences prefsLatitude;
+                                prefsLatitude = PreferenceManager.
+                                        getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor ed2 = prefsLatitude.edit();
+                                ed2.putString("idLatitude", response.body().getLatitude());
+                                ed2.apply();
 
-                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                                String idMotorista = prefs.getString("idMotorista", null);
-                                MyThread myThread = new MyThread(idMotorista, response.body().getLatitude(), response.body().getLongitude(), idVaga);
-                                new Thread(myThread).start();
+                                SharedPreferences prefsLongitude;
+                                prefsLongitude = PreferenceManager.
+                                        getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor ed3 = prefsLongitude.edit();
+                                ed3.putString("idLongitude", response.body().getLongitude());
+                                ed3.apply();
+
 
                             } else {
                                 JSONObject jObjError = null;
                                 try {
                                     jObjError = new JSONObject(response.errorBody().string());
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
+                                } catch (JSONException | IOException e) {
                                     e.printStackTrace();
                                 }
                                 try {
+                                    assert jObjError != null;
                                     textVaga.setText(jObjError.getString("error"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -141,8 +150,28 @@ public class ShowVacanceActivity extends AppCompatActivity {
 
             }
         });
+        SharedPreferences prefs2 = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String idVaga = prefs2.getString("idVaga", null);
+        //System.out.println("Verificando o Id da Vaga" + idVaga);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String idMotorista = prefs.getString("idMotorista", null);
+        //System.out.println("verificando o id do motorista" + idMotorista);
+
+        SharedPreferences prefs3 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String idLatitude = prefs3.getString("idLatitude", null);
+        //System.out.println("verificando o id da Latitude" + idLatitude);
+
+        SharedPreferences prefs4 = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String idLongitude = prefs4.getString("idLongitude", null);
+        //System.out.println("verificando o id da Longitude" + idLongitude);
+
+        MyThread myThread = new MyThread(idMotorista, idLatitude, idLongitude, idVaga);
+        new Thread(myThread).start();
+
 
     }
+
 
     class MyThread implements Runnable {
 
@@ -169,22 +198,35 @@ public class ShowVacanceActivity extends AppCompatActivity {
         public void run() {
 
 
-            String urlBASE = "http://192.168.2.75:5000/";
+            String urlBASE = "http://10.0.0.158:5000/";
             retrofit = new Conexao().connectAPI(urlBASE);
             DataService service = retrofit.create(DataService.class);
             ArrayList<Localizacao> myLocations = new ArrayList<>();
             //ArrayList<Localizacao> test = new ArrayList<>();
 
-
+            System.out.println("Aqui........");
             Call<List<Vaga>> allVagas = service.listAll();
+
             allVagas.enqueue(new Callback<List<Vaga>>() {
                 @Override
                 public void onResponse(Call<List<Vaga>> call, Response<List<Vaga>> response) {
-                    //response.body().forEach((n)-> System.out.println(n.getLatitude() + " ----  " + n.getLongitude() ));
-                    response.body().forEach((n) -> myLocations.add(new Localizacao(n.getLatitude(), n.getLongitude())));
+
+                    System.out.println("Response " + response);
+                    //response.body().forEach((n)-> System.out.println(n.getLatitude() + " ----  " + n.getLongitude() ))
+                    // ;
+                    if (response.isSuccessful()) {
+                        System.out.println("Deu bom" + response.body());
+                        response.body().forEach((n) -> myLocations.add(new Localizacao(n.getLatitude(), n.getLongitude())));
+
+
+                    } else {
+                        System.out.println("Olha  o erro " + response.body());
+                    }
+
                     //myLocations.forEach((n)-> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
 
                 }
+
 
                 @Override
                 public void onFailure(Call<List<Vaga>> call, Throwable t) {
@@ -200,56 +242,59 @@ public class ShowVacanceActivity extends AppCompatActivity {
 //
 //
 //            myLocations.add(new Localizacao(LatitudeVaga, LongitudeVaga));
-            if (myLocations.isEmpty()){
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (myLocations.isEmpty()) {
                 System.out.println("Está vazio");
-            }else{
-                myLocations.forEach((n)-> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
+            } else {
+                myLocations.forEach((n) -> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
             }
             //myLocations.forEach((n)-> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
-            int v = 0;
+            int v;
 
-            System.out.println("Depois aqui..");
+            //System.out.println("Depois aqui..");
             Localizacao localizacao;
 
-//            while (flag) {
-//                v = new Random().nextInt(myLocations.size());
-//
-//                localizacao = myLocations.get(v);
-//                Latitude = localizacao.getLatitude();
-//                Longitude = localizacao.getLongitude();
-//
-//                System.out.println(Latitude + "------------------" + Longitude);
-//
-//                Call<Vaga> vaga = service.pegarVagas(idVaga);
-//                vaga.enqueue(new Callback<Vaga>() {
-//                    @Override
-//                    public void onResponse(Call<Vaga> call, Response<Vaga> response) {
-//                        if (response.isSuccessful()) {
-//                            if (response.body().getStatus()) {
-//                                ref = "Outro Motorista ocupou sua vaga :(";
-//                                flag = false;
-//                            } else {
-//                                if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
-//                                    ref = "A Vaga recomendada foi ocupada com sucesso!";
-//                                    flag = false;
-//                                }
-//                            }
-//                        } else {
-//                            System.out.println(response.body());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Vaga> call, Throwable t) {
-//
-//                    }
-//                });
-//                try {
-//                    Thread.sleep(2000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
+            while (flag) {
+                v = new Random().nextInt(myLocations.size());
+
+                localizacao = myLocations.get(v);
+                Latitude = localizacao.getLatitude();
+                Longitude = localizacao.getLongitude();
+
+                Call<Vaga> vaga = service.pegarVagas(idVaga);
+                vaga.enqueue(new Callback<Vaga>() {
+                    @Override
+                    public void onResponse(Call<Vaga> call, Response<Vaga> response) {
+                        if (response.isSuccessful()) {
+                            if (response.body().getStatus()) {
+                                ref = "Outro Motorista ocupou sua vaga :(";
+                                flag = false;
+                            } else {
+                                if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
+                                    ref = "A Vaga recomendada foi ocupada com sucesso!";
+                                    flag = false;
+                                }
+                            }
+                        } else {
+                            System.out.println(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Vaga> call, Throwable t) {
+
+                    }
+                });
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
             runOnUiThread(() -> {
                 textVaga.setText(ref);

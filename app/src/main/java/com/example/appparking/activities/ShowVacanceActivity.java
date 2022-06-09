@@ -1,5 +1,7 @@
 package com.example.appparking.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appparking.API.Conexao;
@@ -36,7 +39,7 @@ import retrofit2.Retrofit;
 public class ShowVacanceActivity extends AppCompatActivity {
 
 
-    private TextView textVaga;
+    private TextView textVaga, textTitulo;
 
     private Retrofit retrofit;
     private Button botaoVagaAceitar, botaoVagaRejeitar;
@@ -45,6 +48,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_vacance);
+        textTitulo = findViewById(R.id.Titulo);
 
         //portao = findViewById(R.id.textPortao);
         textVaga = findViewById(R.id.textVaga);
@@ -67,6 +71,18 @@ public class ShowVacanceActivity extends AppCompatActivity {
                     String idEstacionamento = prefs.getString("idEstacionamento", null);
 
                     assert response.body() != null;
+                    SharedPreferences prefs2;
+                    prefs2 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor ed4 = prefs2.edit();
+                    ed4.putString("LatitudeMotorista", response.body().getLatitude());
+                    ed4.apply();
+
+                    SharedPreferences prefs3;
+                    prefs3 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor ed3 = prefs3.edit();
+                    ed3.putString("LongitudeMotorista", response.body().getLongitude());
+                    ed3.apply();
+
                     Vaga vaga = new Vaga(idEstacionamento, response.body().getLongitude(), response.body().getLatitude());
 
                     Call<Vaga> requestVaga = service.RecomendarVaga(response.body().id, vaga);
@@ -152,6 +168,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
 
             }
         });
+        //VAGA
         SharedPreferences prefs2 = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String idVaga = prefs2.getString("idVaga", null);
         //System.out.println("Verificando o Id da Vaga" + idVaga);
@@ -168,11 +185,17 @@ public class ShowVacanceActivity extends AppCompatActivity {
         String idLongitude = prefs4.getString("idLongitude", null);
         //System.out.println("verificando o id da Longitude" + idLongitude);
 
-        MyThread myThread = new MyThread(idMotorista, idLatitude, idLongitude, idVaga);
+
+        //MOTORISTA
+        SharedPreferences prefs5 = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String LatitudeMotorista = prefs5.getString("LatitudeMotorista", null);
+
+        SharedPreferences prefs6 = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String LongitudeMotorista = prefs5.getString("LongitudeMotorista", null);
+
+        MyThread myThread = new MyThread(idMotorista, idLatitude, idLongitude, idVaga, LatitudeMotorista, LongitudeMotorista);
         new Thread(myThread).start();
         botaoVagaRejeitar.setOnClickListener(v -> {
-//            Intent intent = new Intent(this.getApplicationContext(), ShowVacanceActivity.class);
-//            startActivity(intent);
             Intent intent = getIntent();
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             finish();
@@ -191,14 +214,17 @@ public class ShowVacanceActivity extends AppCompatActivity {
         private String idVaga;
         private String Latitude, Longitude;
         private String LatitudeVaga, LongitudeVaga;
+        private String LatitudeMotorista, LongitudeMotorista;
         private String ref;
 
 
-        public MyThread(String id, String LatitudeVaga, String LongitudeVaga, String idVaga) {
+        public MyThread(String id, String LatitudeVaga, String LongitudeVaga, String idVaga, String LongitudeMotorista, String LatitudeMotorista) {
             this.id = id;
             this.LatitudeVaga = LatitudeVaga;
             this.LongitudeVaga = LongitudeVaga;
             this.idVaga = idVaga;
+            this.LatitudeMotorista = LatitudeMotorista;
+            this.LongitudeMotorista = LongitudeMotorista;
         }
 
 
@@ -220,11 +246,8 @@ public class ShowVacanceActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<List<Vaga>> call, Response<List<Vaga>> response) {
 
-                    System.out.println("Response " + response);
-                    //response.body().forEach((n)-> System.out.println(n.getLatitude() + " ----  " + n.getLongitude() ))
-                    // ;
+
                     if (response.isSuccessful()) {
-                        System.out.println("Deu bom" + response.body());
                         response.body().forEach((n) -> myLocations.add(new Localizacao(n.getLatitude(), n.getLongitude())));
 
 
@@ -261,13 +284,16 @@ public class ShowVacanceActivity extends AppCompatActivity {
             } else {
                 myLocations.forEach((n) -> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
             }
-            //myLocations.forEach((n)-> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
             int v;
 
-            //System.out.println("Depois aqui..");
             Localizacao localizacao;
-
+            myLocations.add(new Localizacao(this.LatitudeMotorista, this.LongitudeMotorista));
             while (flag) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 v = new Random().nextInt(myLocations.size());
 
                 localizacao = myLocations.get(v);
@@ -279,8 +305,12 @@ public class ShowVacanceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Vaga> call, Response<Vaga> response) {
                         if (response.isSuccessful()) {
+                            //System.out.println("Latitude do motorista" + Latitude + "Longitude do motorista" + Longitude);
+                            System.out.println("result " + response.body().getStatus());
                             if (response.body().getStatus()) {
+                                System.out.println("aqui");
                                 ref = "Outro Motorista ocupou sua vaga :(";
+
                                 flag = false;
                             } else {
                                 if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
@@ -307,6 +337,36 @@ public class ShowVacanceActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 textVaga.setText(ref);
+                if (ref.equals("Outro Motorista ocupou sua vaga :(")) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ShowVacanceActivity.this);
+                    dialog.setTitle("Alerta");
+                    dialog.setMessage("Deseja receber outra recomendação?");
+                    dialog.setCancelable(false);
+                    dialog.setIcon(R.drawable.parkingicon);
+                    dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = getIntent();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            finish();
+                            startActivity(intent);
+                        }
+                    });
+                    dialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            botaoVagaAceitar.setVisibility(View.INVISIBLE);
+                            botaoVagaRejeitar.setVisibility(View.INVISIBLE);
+                            textTitulo.setVisibility(View.INVISIBLE);
+                            textVaga.setText("Até a próxima!");
+
+
+                        }
+                    });
+                    dialog.create();
+                    dialog.show();
+                }
+
             });
 
         }

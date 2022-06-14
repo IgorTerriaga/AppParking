@@ -54,7 +54,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
         textVaga = findViewById(R.id.textVaga);
         botaoVagaAceitar = findViewById(R.id.buttonAceitar);
         botaoVagaRejeitar = findViewById(R.id.buttonRejeitar);
-        String urlBASE = "http://10.0.0.158:5000/";
+        String urlBASE = "http://192.168.0.149:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);
@@ -233,7 +233,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
         public void run() {
 
 
-            String urlBASE = "http://10.0.0.158:5000/";
+            String urlBASE = "http://192.168.0.149:5000/";
             retrofit = new Conexao().connectAPI(urlBASE);
             DataService service = retrofit.create(DataService.class);
             ArrayList<Localizacao> myLocations = new ArrayList<>();
@@ -266,11 +266,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
                 }
             });
 
-//            myLocations.add(new Localizacao("-1111111.001", "-1111111.002"));
-//            myLocations.add(new Localizacao("-1111111.003", "-1111111.004"));
-//            myLocations.add(new Localizacao("-1111111.005", "-1111111.006"));
-//            myLocations.add(new Localizacao("-1111111.007", "-1111111.008"));
-//            myLocations.add(new Localizacao("-1111111.009", "-1111111.0010"));
+
 //
 //
 //            myLocations.add(new Localizacao(LatitudeVaga, LongitudeVaga));
@@ -288,12 +284,18 @@ public class ShowVacanceActivity extends AppCompatActivity {
 
             Localizacao localizacao;
             myLocations.add(new Localizacao(this.LatitudeMotorista, this.LongitudeMotorista));
+            //Percurso com localização com a vaga
+            myLocations.add(new Localizacao("-1111111.001", "-1111111.002"));
+            myLocations.add(new Localizacao("-1111111.003", "-1111111.004"));
+            myLocations.add(new Localizacao("-1111111.005", "-1111111.006"));
+            myLocations.add(new Localizacao("-1111111.007", "-1111111.008"));
+            myLocations.add(new Localizacao("-1111111.009", "-1111111.0010"));
             while (flag) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 v = new Random().nextInt(myLocations.size());
 
                 localizacao = myLocations.get(v);
@@ -313,9 +315,14 @@ public class ShowVacanceActivity extends AppCompatActivity {
 
                                 flag = false;
                             } else {
+                                //Recomendada
                                 if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
                                     ref = "A Vaga recomendada foi ocupada com sucesso!";
                                     flag = false;
+                                } else if (Latitude.startsWith("-10")) {
+                                    textVaga.setText("Você ocupou a vaga não recomendada");
+                                } else {
+
                                 }
                             }
                         } else {

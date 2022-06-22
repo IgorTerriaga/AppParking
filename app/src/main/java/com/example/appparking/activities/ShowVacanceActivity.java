@@ -49,15 +49,14 @@ public class ShowVacanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_vacance);
         textTitulo = findViewById(R.id.Titulo);
-
-        //portao = findViewById(R.id.textPortao);
         textVaga = findViewById(R.id.textVaga);
         botaoVagaAceitar = findViewById(R.id.buttonAceitar);
         botaoVagaRejeitar = findViewById(R.id.buttonRejeitar);
-        String urlBASE = "http://192.168.0.149:5000/";
+        String urlBASE = "http://10.0.0.158:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
         DataService service = retrofit.create(DataService.class);
+
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("my_prefs_data", MODE_PRIVATE);
         String token = preferences.getString("token", "");
         Call<Motorista> motorista = service.GetMotorista("Bearer " + token);
@@ -101,6 +100,14 @@ public class ShowVacanceActivity extends AppCompatActivity {
                         public void onResponse(Call<Vaga> call, Response<Vaga> response) {
                             if (response.isSuccessful()) {
                                 textVaga.setText(response.body() != null ? response.body().getVaga() : null);
+                                //System.out.println("ao entrar na primeira requisição, " + response.body().getRecomendacao());
+
+//                                SharedPreferences prefsRecomendacao;
+//                                prefsRecomendacao = PreferenceManager.
+//                                        getDefaultSharedPreferences(getApplicationContext());
+//                                SharedPreferences.Editor edrecomendacao = prefsRecomendacao.edit();
+//                                edrecomendacao.putBoolean("recomendacao", response.body().getRecomendacao());
+//                                edrecomendacao.apply();
 
                                 SharedPreferences prefs2;
                                 prefs2 = PreferenceManager.
@@ -171,19 +178,22 @@ public class ShowVacanceActivity extends AppCompatActivity {
         //VAGA
         SharedPreferences prefs2 = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String idVaga = prefs2.getString("idVaga", null);
-        //System.out.println("Verificando o Id da Vaga" + idVaga);
+
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String idMotorista = prefs.getString("idMotorista", null);
-        //System.out.println("verificando o id do motorista" + idMotorista);
+
 
         SharedPreferences prefs3 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String idLatitude = prefs3.getString("idLatitude", null);
-        //System.out.println("verificando o id da Latitude" + idLatitude);
+
 
         SharedPreferences prefs4 = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String idLongitude = prefs4.getString("idLongitude", null);
-        //System.out.println("verificando o id da Longitude" + idLongitude);
+
+//        SharedPreferences prefsrecomendacao = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+//        Boolean recomendacao = prefsrecomendacao.getBoolean("recomendacao", true);
+//        System.out.println("Olha o valor da recomendacao.." + recomendacao);
 
 
         //MOTORISTA
@@ -196,6 +206,22 @@ public class ShowVacanceActivity extends AppCompatActivity {
         MyThread myThread = new MyThread(idMotorista, idLatitude, idLongitude, idVaga, LatitudeMotorista, LongitudeMotorista);
         new Thread(myThread).start();
         botaoVagaRejeitar.setOnClickListener(v -> {
+            Vaga vaga = new Vaga(false);
+            Call<Vaga> requestVaga = service.UpdateRecomendacaoVaga(idVaga, vaga);
+            requestVaga.enqueue(new Callback<Vaga>() {
+                @Override
+                public void onResponse(Call<Vaga> call, Response<Vaga> response) {
+                    if (response.isSuccessful()) {
+                        System.out.println("OKKKKK" + response.body().getRecomendacao() + response.body().getId());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Vaga> call, Throwable t) {
+
+                }
+            });
+
             Intent intent = getIntent();
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             finish();
@@ -206,7 +232,6 @@ public class ShowVacanceActivity extends AppCompatActivity {
 
 
     class MyThread implements Runnable {
-
 
         private String id;
 
@@ -233,13 +258,12 @@ public class ShowVacanceActivity extends AppCompatActivity {
         public void run() {
 
 
-            String urlBASE = "http://192.168.0.149:5000/";
+            String urlBASE = "http://10.0.0.158:5000/";
             retrofit = new Conexao().connectAPI(urlBASE);
             DataService service = retrofit.create(DataService.class);
             ArrayList<Localizacao> myLocations = new ArrayList<>();
-            //ArrayList<Localizacao> test = new ArrayList<>();
 
-            System.out.println("Aqui........");
+
             Call<List<Vaga>> allVagas = service.listAll();
 
             allVagas.enqueue(new Callback<List<Vaga>>() {
@@ -255,10 +279,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
                         System.out.println("Olha  o erro " + response.body());
                     }
 
-                    //myLocations.forEach((n)-> System.out.println(n.getLatitude() + " -----" + n.getLongitude()));
-
                 }
-
 
                 @Override
                 public void onFailure(Call<List<Vaga>> call, Throwable t) {
@@ -266,10 +287,6 @@ public class ShowVacanceActivity extends AppCompatActivity {
                 }
             });
 
-
-//
-//
-//            myLocations.add(new Localizacao(LatitudeVaga, LongitudeVaga));
             try {
                 Thread.sleep(4000);
             } catch (InterruptedException e) {
@@ -291,11 +308,6 @@ public class ShowVacanceActivity extends AppCompatActivity {
             myLocations.add(new Localizacao("-1111111.007", "-1111111.008"));
             myLocations.add(new Localizacao("-1111111.009", "-1111111.0010"));
             while (flag) {
-//                try {
-//                    Thread.sleep(2000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
                 v = new Random().nextInt(myLocations.size());
 
                 localizacao = myLocations.get(v);
@@ -307,21 +319,24 @@ public class ShowVacanceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Vaga> call, Response<Vaga> response) {
                         if (response.isSuccessful()) {
-                            //System.out.println("Latitude do motorista" + Latitude + "Longitude do motorista" + Longitude);
-                            System.out.println("result " + response.body().getStatus());
-                            if (response.body().getStatus()) {
-                                System.out.println("aqui");
-                                ref = "Outro Motorista ocupou sua vaga :(";
 
+                            if (response.body().getStatus()) {
+                                ref = "Outro Motorista ocupou sua vaga :(";
+                                //textVaga.setText(ref);
                                 flag = false;
                             } else {
                                 //Recomendada
                                 if (Latitude.equals(LatitudeVaga) && Longitude.equals(LongitudeVaga)) {
                                     ref = "A Vaga recomendada foi ocupada com sucesso!";
+                                    botaoVagaRejeitar.setVisibility(View.INVISIBLE);
+                                    botaoVagaAceitar.setVisibility(View.INVISIBLE);
+                                    textTitulo.setVisibility(View.INVISIBLE);
                                     flag = false;
                                 } else if (Latitude.startsWith("-10")) {
                                     textVaga.setText("Você ocupou a vaga não recomendada");
-                                } else {
+                                    botaoVagaRejeitar.setVisibility(View.INVISIBLE);
+                                    botaoVagaAceitar.setVisibility(View.INVISIBLE);
+                                    textTitulo.setVisibility(View.INVISIBLE);
 
                                 }
                             }
@@ -345,8 +360,9 @@ public class ShowVacanceActivity extends AppCompatActivity {
             runOnUiThread(() -> {
                 textVaga.setText(ref);
                 if (ref.equals("Outro Motorista ocupou sua vaga :(")) {
+                    textTitulo.setVisibility(View.INVISIBLE);
                     AlertDialog.Builder dialog = new AlertDialog.Builder(ShowVacanceActivity.this);
-                    dialog.setTitle("Alerta");
+                    dialog.setTitle("Vaga já indisponível!");
                     dialog.setMessage("Deseja receber outra recomendação?");
                     dialog.setCancelable(false);
                     dialog.setIcon(R.drawable.parkingicon);
@@ -364,6 +380,7 @@ public class ShowVacanceActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             botaoVagaAceitar.setVisibility(View.INVISIBLE);
                             botaoVagaRejeitar.setVisibility(View.INVISIBLE);
+                            textTitulo.setVisibility(View.INVISIBLE);
                             textTitulo.setVisibility(View.INVISIBLE);
                             textVaga.setText("Até a próxima!");
 

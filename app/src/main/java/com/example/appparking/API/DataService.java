@@ -33,6 +33,13 @@ public interface DataService {
     @GET("/estacionamento")
     Call<List<Estacionamento>> recuperarEstacionamentos();
 
+    @PUT("/vagas/{id}")
+    @Headers({
+            "Content-Type: application/json;charset=utf-8",
+            "Accept: application/json;charset=utf-8",
+            "Cache-Control: max-age=640000"
+    })
+    Call<Vaga> UpdateRecomendacaoVaga(@Path("id") String id, @Body Vaga vaga);
 
     @GET("/vaga/{id}")
     Call<Vaga> pegarVagas(@Path("id") String id);

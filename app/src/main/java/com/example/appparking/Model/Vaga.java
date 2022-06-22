@@ -10,6 +10,7 @@ public class Vaga {
     public String vaga;
     public String portao;
     public Boolean status;
+    public Boolean recomendacao;
 
     public Vaga(String Id, String idEstacionamento, String idLoja, String longitude, String latitude, String vaga, String portao) {
         this.id = Id;
@@ -33,6 +34,10 @@ public class Vaga {
         this.latitude = latitude;
     }
 
+    public Vaga(Boolean recomendacao) {
+        this.recomendacao = recomendacao;
+    }
+
     public String getId() {
         return id;
     }
@@ -46,7 +51,13 @@ public class Vaga {
         return longitude;
     }
 
+    public Boolean getRecomendacao() {
+        return recomendacao;
+    }
 
+    public void setRecomendacao(Boolean recomendacao) {
+        this.recomendacao = recomendacao;
+    }
 
     public String getLatitude() {
         return latitude;

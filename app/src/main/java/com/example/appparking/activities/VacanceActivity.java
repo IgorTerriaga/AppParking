@@ -40,9 +40,7 @@ public class VacanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacance);
 
-
-        //String urlBASE = "http://192.168.2.125:5000/";
-        String urlBASE = "http://192.168.0.149:5000/";
+        String urlBASE = "http://10.0.0.158:5000/";
 
         retrofit = new Conexao().connectAPI(urlBASE);
 

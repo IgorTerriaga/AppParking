@@ -73,7 +73,6 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onResponse(Call<Motorista> call, Response<Motorista> response) {
                     if (response.isSuccessful()) {
                         Intent intent = new Intent(getApplicationContext(), Register2Activity.class);
-                        //System.out.println("xxxxxxxxxxxxx " + response.body().getId());
                         intent.putExtra("idDriver", response.body().getId());
                         startActivity(intent);
 
